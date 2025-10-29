@@ -274,20 +274,41 @@ api:
       summary: Manager notifications and alerts
       sourcemap: true
 
-    # AJAX Handler for Legacy Compatibility
-    - path: /manager-tools/ajax
+    - path: /api/live-events
+      method: GET
+      id: live-events-api
+      handler: ./routes/api/live-events.ts
+      auth: public  # Temporarily public for testing, should be jwt
+      parameters:
+        - name: format
+          in: query
+          schema: { type: boolean }
+        - name: markets
+          in: query
+          schema: { type: boolean }
+        - name: scores
+          in: query
+          schema: { type: boolean }
+      response:
+        200: { schema: LiveEventsAPIResponse }
+        500: { schema: Error }
+      tags: [api, live-events, betting]
+      summary: Live betting events data from external platform
+      sourcemap: true
+
+    - path: /api/ajax-actions
       method: POST
-      id: manager-ajax
-      handler: ./routes/manager-tools/ajax.ts
-      auth: jwt
+      id: ajax-actions-api
+      handler: ./routes/api/ajax-actions.ts
+      auth: public  # Temporarily public for testing, should be jwt
       request:
-        schema: AjaxRequest
+        schema: AjaxActionRequest
         required: true
       response:
-        200: { schema: AjaxResponse }
-        401: { schema: Error }
-      tags: [ajax, manager-tools, legacy]
-      summary: AJAX endpoint for manager tools
+        200: { schema: AjaxActionResponse }
+        500: { schema: Error }
+      tags: [api, ajax, betting]
+      summary: AJAX betting actions (getBetReport, etc.) from external platform
       sourcemap: true
 
     # Unified SQL API Routes
