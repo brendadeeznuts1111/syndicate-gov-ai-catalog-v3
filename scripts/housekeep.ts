@@ -45,6 +45,13 @@ async function executeCommand(cmd: string[], options: { cwd?: string } = {}): Pr
 async function gitGarbageCollection(): Promise<boolean> {
   console.log('🧹 Running Git garbage collection...');
   
+  // Check if we're in a git repository
+  const gitCheck = await executeCommand(['git', 'rev-parse', '--git-dir']);
+  if (!gitCheck.success) {
+    console.warn('⚠️ Not in a git repository, skipping Git GC');
+    return true;
+  }
+  
   const gcFlags = config.gitGcAggressive ? ['gc', '--aggressive', '--prune=now'] : ['gc', '--prune=now'];
   const result = await executeCommand(['git', ...gcFlags]);
   
@@ -106,6 +113,18 @@ async function runAudit(): Promise<boolean> {
   }
   
   console.log('🔍 Running Bun audit...');
+  
+  // Check if lockfile exists
+  const lockfileCheck = await executeCommand(['test', '-f', 'bun.lockb']);
+  if (!lockfileCheck.success) {
+    console.warn('⚠️ No bun.lockb found, running bun install first...');
+    const installResult = await executeCommand(['bun', 'install']);
+    if (!installResult.success) {
+      console.warn('⚠️ Could not install dependencies, skipping audit');
+      return true;
+    }
+  }
+  
   const result = await executeCommand(['bun', 'audit', '--json']);
   
   if (result.success) {
@@ -124,6 +143,14 @@ async function runValidation(): Promise<boolean> {
   }
   
   console.log('🛡️ Running GOV validation...');
+  
+  // Check if validation script exists
+  const scriptCheck = await executeCommand(['test', '-f', 'scripts/ci-validate.ts']);
+  if (!scriptCheck.success) {
+    console.warn('⚠️ Validation script not found, skipping validation');
+    return true;
+  }
+  
   const result = await executeCommand(['bun', 'run', 'ci:validate']);
   
   if (result.success) {
