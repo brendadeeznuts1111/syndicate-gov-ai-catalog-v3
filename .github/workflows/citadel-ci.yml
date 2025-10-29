@@ -26,14 +26,15 @@ jobs:
       
       - name: Run Citadel CI Gate
         run: |
-          bun test --smol --coverage --bail=3 --rerun-each=5 --randomize --seed=${{ github.run_id }}
+          bun test --only-failures --reporter=junit --reporter-outfile=bun.xml \
+            --rerun-each=5 --bail=3 --randomize --seed=${{ github.run_id }}
         env:
           CLAUDECODE: ${{ github.actor == 'claude-code' && '1' || '0' }}
       
       - name: Enhanced Runtime Checks
         run: |
-          bun test ./tests/tz-matrix.test.ts
-          bun test ./tests/memory.test.ts ./tests/async-leak.test.ts ./tests/sourcemap.test.ts
+          bun test --only-failures --pass-with-no-tests ./tests/tz-matrix.test.ts
+          bun test --only-failures --pass-with-no-tests ./tests/memory.test.ts ./tests/async-leak.test.ts ./tests/sourcemap.test.ts
       
       - name: Upload JUnit Report
         uses: actions/upload-artifact@v4

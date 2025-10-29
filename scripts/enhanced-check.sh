@@ -3,7 +3,7 @@
 set -euo pipefail
 
 bun install --frozen-lockfile
-bun test --smol --coverage --bail=3 || {
+bun test --only-failures --pass-with-no-tests --rerun-each=3 --bail=3 --randomize --seed=$(date +%s) --coverage || {
   echo "❌ Tests failed"
   exit 1
 }

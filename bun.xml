@@ -1,12 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="bun test" tests="5" assertions="7" failures="0" skipped="0" time="0.086594">
-  <testsuite name="tests/citadel.test.ts" file="tests/citadel.test.ts" tests="5" assertions="7" failures="0" skipped="0" time="0" hostname="Mac.attlocal.net">
-    <testsuite name="Citadel CI Gate" file="tests/citadel.test.ts" line="5" tests="5" assertions="7" failures="0" skipped="0" time="0.068" hostname="Mac.attlocal.net">
-      <testcase name="idempotency" classname="Citadel CI Gate" time="0.037258" file="tests/citadel.test.ts" line="31" assertions="1" />
-      <testcase name="spec validity" classname="Citadel CI Gate" time="0.020229" file="tests/citadel.test.ts" line="40" assertions="1" />
-      <testcase name="docs serve" classname="Citadel CI Gate" time="0.005546" file="tests/citadel.test.ts" line="45" assertions="1" />
-      <testcase name="wand endpoints" classname="Citadel CI Gate" time="0.000522" file="tests/citadel.test.ts" line="50" assertions="2" />
-      <testcase name="yaml parsing" classname="Citadel CI Gate" time="0.006058" file="tests/citadel.test.ts" line="57" assertions="2" />
+<testsuites name="bun test" tests="61" assertions="114" failures="2" skipped="0" time="0.783481">
+  <testsuite name="tests/async-leak.test.ts" file="tests/async-leak.test.ts" tests="1" assertions="1" failures="0" skipped="0" time="0" hostname="Mac.attlocal.net">
+    <testcase name="no dangling timers" classname="" time="0.000616" file="tests/async-leak.test.ts" line="4" assertions="1" />
+  </testsuite>
+  <testsuite name="tests/advanced-bun-features.test.ts" file="tests/advanced-bun-features.test.ts" tests="16" assertions="25" failures="2" skipped="0" time="0" hostname="Mac.attlocal.net">
+    <testsuite name="Advanced Bun Testing Features" file="tests/advanced-bun-features.test.ts" line="14" tests="16" assertions="25" failures="2" skipped="0" time="0" hostname="Mac.attlocal.net">
+      <testsuite name="Error Handling" file="tests/advanced-bun-features.test.ts" line="133" tests="2" assertions="2" failures="0" skipped="0" time="0.001" hostname="Mac.attlocal.net">
+        <testcase name="handles invalid JSON gracefully" classname="Error Handling &amp;gt; Advanced Bun Testing Features" time="0.001705" file="tests/advanced-bun-features.test.ts" line="143" assertions="1" />
+        <testcase name="handles file not found gracefully" classname="Error Handling &amp;gt; Advanced Bun Testing Features" time="0.000376" file="tests/advanced-bun-features.test.ts" line="134" assertions="1" />
+      </testsuite>
+      <testsuite name="Bun File Utilities" file="tests/advanced-bun-features.test.ts" line="73" tests="1" assertions="3" failures="0" skipped="0" time="0" hostname="Mac.attlocal.net">
+        <testcase name="file operations" classname="Bun File Utilities &amp;gt; Advanced Bun Testing Features" time="0.000406" file="tests/advanced-bun-features.test.ts" line="74" assertions="3" />
+      </testsuite>
+      <testsuite name="Performance Testing" file="tests/advanced-bun-features.test.ts" line="160" tests="2" assertions="3" failures="0" skipped="0" time="0.051" hostname="Mac.attlocal.net">
+        <testcase name="measure execution time" classname="Performance Testing &amp;gt; Advanced Bun Testing Features" time="0.051981" file="tests/advanced-bun-features.test.ts" line="161" assertions="2" />
+        <testcase name="benchmark utility function" classname="Performance Testing &amp;gt; Advanced Bun Testing Features" time="0.000623" file="tests/advanced-bun-features.test.ts" line="170" assertions="1" />
+      </testsuite>
+      <testsuite name="Per-Test Timeouts" file="tests/advanced-bun-features.test.ts" line="99" tests="2" assertions="2" failures="0" skipped="0" time="0.101" hostname="Mac.attlocal.net">
+        <testcase name="test with custom timeout" classname="Per-Test Timeouts &amp;gt; Advanced Bun Testing Features" time="0.101344" file="tests/advanced-bun-features.test.ts" line="100" assertions="1" />
+        <testcase name="fast test with short timeout" classname="Per-Test Timeouts &amp;gt; Advanced Bun Testing Features" time="0.000105" file="tests/advanced-bun-features.test.ts" line="106" assertions="1" />
+      </testsuite>
+      <testsuite name="Advanced Snapshot Testing" file="tests/advanced-bun-features.test.ts" line="112" tests="2" assertions="2" failures="1" skipped="0" time="0" hostname="Mac.attlocal.net">
+        <testcase name="snapshot file operations" classname="Advanced Snapshot Testing &amp;gt; Advanced Bun Testing Features" time="0.000138" file="tests/advanced-bun-features.test.ts" line="122" assertions="1" />
+        <testcase name="snapshot with generated data" classname="Advanced Snapshot Testing &amp;gt; Advanced Bun Testing Features" time="0.00041" file="tests/advanced-bun-features.test.ts" line="113" assertions="1">
+          <failure type="AssertionError" />
+        </testcase>
+      </testsuite>
+      <testsuite name="Bun Utility Functions" file="tests/advanced-bun-features.test.ts" line="36" tests="4" assertions="10" failures="0" skipped="0" time="0.385" hostname="Mac.attlocal.net">
+        <testcase name="sleep utility for async tests" classname="Bun Utility Functions &amp;gt; Advanced Bun Testing Features" time="0.100743" file="tests/advanced-bun-features.test.ts" line="37" assertions="1" />
+        <testcase name="password hashing and verification" classname="Bun Utility Functions &amp;gt; Advanced Bun Testing Features" time="0.285432" file="tests/advanced-bun-features.test.ts" line="61" assertions="4" />
+        <testcase name="UUID generation" classname="Bun Utility Functions &amp;gt; Advanced Bun Testing Features" time="0.000378" file="tests/advanced-bun-features.test.ts" line="44" assertions="3" />
+        <testcase name="deep equality check" classname="Bun Utility Functions &amp;gt; Advanced Bun Testing Features" time="0.00011" file="tests/advanced-bun-features.test.ts" line="52" assertions="2" />
+      </testsuite>
+      <testsuite name="Mock Clock Features" file="tests/advanced-bun-features.test.ts" line="16" tests="3" assertions="3" failures="1" skipped="0" time="0" hostname="Mac.attlocal.net">
+        <testcase name="deterministic time testing" classname="Mock Clock Features &amp;gt; Advanced Bun Testing Features" time="0.000063" file="tests/advanced-bun-features.test.ts" line="17" assertions="1" />
+        <testcase name="set specific time for tests" classname="Mock Clock Features &amp;gt; Advanced Bun Testing Features" time="0.00006" file="tests/advanced-bun-features.test.ts" line="28" assertions="1" />
+        <testcase name="time advancement in tests" classname="Mock Clock Features &amp;gt; Advanced Bun Testing Features" time="0.00089" file="tests/advanced-bun-features.test.ts" line="22" assertions="1">
+          <failure type="AssertionError" />
+        </testcase>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+  <testsuite name="tests/citadel.test.ts" file="tests/citadel.test.ts" tests="6" assertions="8" failures="0" skipped="0" time="0" hostname="Mac.attlocal.net">
+    <testsuite name="Citadel CI Gate" file="tests/citadel.test.ts" line="5" tests="6" assertions="8" failures="0" skipped="0" time="0.162" hostname="Mac.attlocal.net">
+      <testcase name="idempotency" classname="Citadel CI Gate" time="0.093097" file="tests/citadel.test.ts" line="31" assertions="1" />
+      <testcase name="spec validity" classname="Citadel CI Gate" time="0.037611" file="tests/citadel.test.ts" line="40" assertions="1" />
+      <testcase name="wand endpoints" classname="Citadel CI Gate" time="0.005679" file="tests/citadel.test.ts" line="50" assertions="2" />
+      <testcase name="docs serve" classname="Citadel CI Gate" time="0.000269" file="tests/citadel.test.ts" line="45" assertions="1" />
+      <testcase name="lockfile frozen" classname="Citadel CI Gate" time="0.027382" file="tests/citadel.test.ts" line="57" assertions="1" />
+      <testcase name="yaml parsing" classname="Citadel CI Gate" time="0.000447" file="tests/citadel.test.ts" line="62" assertions="2" />
+    </testsuite>
+  </testsuite>
+  <testsuite name="tests/tz-matrix.test.ts" file="tests/tz-matrix.test.ts" tests="3" assertions="3" failures="0" skipped="0" time="0.001" hostname="Mac.attlocal.net">
+    <testcase name="TZ=Europe/Berlin" classname="" time="0.001015" file="tests/tz-matrix.test.ts" line="5" assertions="1" />
+    <testcase name="TZ=America/New_York" classname="" time="0" file="tests/tz-matrix.test.ts" line="5" assertions="1" />
+    <testcase name="TZ=UTC" classname="" time="0" file="tests/tz-matrix.test.ts" line="5" assertions="1" />
+  </testsuite>
+  <testsuite name="tests/api.test.ts" file="tests/api.test.ts" tests="10" assertions="24" failures="0" skipped="0" time="0" hostname="Mac.attlocal.net">
+    <testsuite name="AI Suggester" file="tests/api.test.ts" line="60" tests="2" assertions="4" failures="0" skipped="0" time="0.006" hostname="Mac.attlocal.net">
+      <testcase name="should handle idempotency for route generation" classname="AI Suggester" time="0.006403" file="tests/api.test.ts" line="82" assertions="1" />
+      <testcase name="should parse YAML configuration" classname="AI Suggester" time="0.000273" file="tests/api.test.ts" line="61" assertions="3" />
+    </testsuite>
+    <testsuite name="Citadel API Routes" file="tests/api.test.ts" line="4" tests="6" assertions="14" failures="0" skipped="0" time="0" hostname="Mac.attlocal.net">
+      <testsuite name="Admin Wand Endpoints" file="tests/api.test.ts" line="29" tests="4" assertions="8" failures="0" skipped="0" time="0" hostname="Mac.attlocal.net">
+        <testcase name="should handle wand reload" classname="Admin Wand Endpoints &amp;gt; Citadel API Routes" time="0.000106" file="tests/api.test.ts" line="30" assertions="2" />
+        <testcase name="should handle wand diff" classname="Admin Wand Endpoints &amp;gt; Citadel API Routes" time="0" file="tests/api.test.ts" line="37" assertions="2" />
+        <testcase name="should handle wand rollback" classname="Admin Wand Endpoints &amp;gt; Citadel API Routes" time="0" file="tests/api.test.ts" line="44" assertions="2" />
+        <testcase name="should return 404 for unknown wand actions" classname="Admin Wand Endpoints &amp;gt; Citadel API Routes" time="0.00017" file="tests/api.test.ts" line="51" assertions="2" />
+      </testsuite>
+      <testsuite name="Documentation Endpoints" file="tests/api.test.ts" line="5" tests="2" assertions="6" failures="0" skipped="0" time="0" hostname="Mac.attlocal.net">
+        <testcase name="should serve Swagger UI at /_docs" classname="Documentation Endpoints &amp;gt; Citadel API Routes" time="0.000228" file="tests/api.test.ts" line="6" assertions="3" />
+        <testcase name="should serve OpenAPI spec at /openapi.yaml" classname="Documentation Endpoints &amp;gt; Citadel API Routes" time="0.000026" file="tests/api.test.ts" line="17" assertions="3" />
+      </testsuite>
+    </testsuite>
+    <testsuite name="Schema Generation" file="tests/api.test.ts" line="94" tests="2" assertions="6" failures="0" skipped="0" time="0" hostname="Mac.attlocal.net">
+      <testcase name="should generate valid OpenAPI components" classname="Schema Generation" time="0" file="tests/api.test.ts" line="95" assertions="4" />
+      <testcase name="should handle Zod to OpenAPI conversion" classname="Schema Generation" time="0" file="tests/api.test.ts" line="111" assertions="2" />
+    </testsuite>
+  </testsuite>
+  <testsuite name="tests/ai-suggester.test.ts" file="tests/ai-suggester.test.ts" tests="9" assertions="15" failures="0" skipped="0" time="0" hostname="Mac.attlocal.net">
+    <testsuite name="AI Suggester" file="tests/ai-suggester.test.ts" line="18" tests="7" assertions="12" failures="0" skipped="0" time="0.001" hostname="Mac.attlocal.net">
+      <testcase name="should generate unique route IDs" classname="AI Suggester" time="0.000004" file="tests/ai-suggester.test.ts" line="54" assertions="2" />
+      <testcase name="should handle file operations atomically" classname="AI Suggester" time="0.001069" file="tests/ai-suggester.test.ts" line="98" assertions="1" />
+      <testcase name="should generate handler template with correct structure" classname="AI Suggester" time="0" file="tests/ai-suggester.test.ts" line="78" assertions="3" />
+      <testcase name="should load configuration from YAML" classname="AI Suggester" time="0" file="tests/ai-suggester.test.ts" line="36" assertions="2" />
+      <testcase name="should respect feature flags" classname="AI Suggester" time="0" file="tests/ai-suggester.test.ts" line="114" assertions="1" />
+      <testcase name="should create idempotency hash" classname="AI Suggester" time="0" file="tests/ai-suggester.test.ts" line="63" assertions="1" />
+      <testcase name="should filter routes based on confidence" classname="AI Suggester" time="0.000958" file="tests/ai-suggester.test.ts" line="44" assertions="2" />
+    </testsuite>
+    <testsuite name="Telemetry Integration" file="tests/ai-suggester.test.ts" line="125" tests="2" assertions="3" failures="0" skipped="0" time="0" hostname="Mac.attlocal.net">
+      <testcase name="should send telemetry data" classname="Telemetry Integration" time="0" file="tests/ai-suggester.test.ts" line="126" assertions="1" />
+      <testcase name="should handle telemetry failures gracefully" classname="Telemetry Integration" time="0.000612" file="tests/ai-suggester.test.ts" line="144" assertions="2" />
+    </testsuite>
+  </testsuite>
+  <testsuite name="tests/sourcemap.test.ts" file="tests/sourcemap.test.ts" tests="1" assertions="2" failures="0" skipped="0" time="0" hostname="Mac.attlocal.net">
+    <testcase name="handler has valid structure" classname="" time="0.000911" file="tests/sourcemap.test.ts" line="4" assertions="2" />
+  </testsuite>
+  <testsuite name="tests/env.test.ts" file="tests/env.test.ts" tests="2" assertions="3" failures="0" skipped="0" time="0" hostname="Mac.attlocal.net">
+    <testcase name="env snapshot" classname="" time="0.000142" file="tests/env.test.ts" line="10" assertions="1" />
+    <testcase name="required env vars present" classname="" time="0" file="tests/env.test.ts" line="22" assertions="2" />
+  </testsuite>
+  <testsuite name="tests/memory.test.ts" file="tests/memory.test.ts" tests="1" assertions="1" failures="0" skipped="0" time="0" hostname="Mac.attlocal.net">
+    <testcase name="no handler leak" classname="" time="0.000778" file="tests/memory.test.ts" line="4" assertions="1" />
+  </testsuite>
+  <testsuite name="tests/schema.test.ts" file="tests/schema.test.ts" tests="12" assertions="32" failures="0" skipped="0" time="0" hostname="Mac.attlocal.net">
+    <testsuite name="Route Registration" file="tests/schema.test.ts" line="152" tests="3" assertions="11" failures="0" skipped="0" time="0" hostname="Mac.attlocal.net">
+      <testcase name="should register GET route with schema" classname="Route Registration" time="0" file="tests/schema.test.ts" line="153" assertions="4" />
+      <testcase name="should handle WebSocket routes" classname="Route Registration" time="0" file="tests/schema.test.ts" line="193" assertions="4" />
+      <testcase name="should register POST route with request schema" classname="Route Registration" time="0" file="tests/schema.test.ts" line="173" assertions="3" />
+    </testsuite>
+    <testsuite name="OpenAPI Schema Generation" file="tests/schema.test.ts" line="4" tests="9" assertions="21" failures="0" skipped="0" time="0" hostname="Mac.attlocal.net">
+      <testcase name="should generate basic OpenAPI structure" classname="OpenAPI Schema Generation" time="0.000154" file="tests/schema.test.ts" line="5" assertions="3" />
+      <testcase name="should convert Zod object to OpenAPI object" classname="OpenAPI Schema Generation" time="0.000051" file="tests/schema.test.ts" line="63" assertions="5" />
+      <testcase name="should convert Zod array to OpenAPI array" classname="OpenAPI Schema Generation" time="0" file="tests/schema.test.ts" line="47" assertions="2" />
+      <testcase name="should convert Zod number to OpenAPI number" classname="OpenAPI Schema Generation" time="0" file="tests/schema.test.ts" line="33" assertions="1" />
+      <testcase name="should handle optional Zod properties" classname="OpenAPI Schema Generation" time="0.000126" file="tests/schema.test.ts" line="92" assertions="2" />
+      <testcase name="should add AI metadata to schemas" classname="OpenAPI Schema Generation" time="0.000066" file="tests/schema.test.ts" line="116" assertions="3" />
+      <testcase name="should handle unknown Zod types gracefully" classname="OpenAPI Schema Generation" time="0.000071" file="tests/schema.test.ts" line="133" assertions="3" />
+      <testcase name="should convert Zod boolean to OpenAPI boolean" classname="OpenAPI Schema Generation" time="0.000004" file="tests/schema.test.ts" line="40" assertions="1" />
+      <testcase name="should convert Zod string to OpenAPI string" classname="OpenAPI Schema Generation" time="0" file="tests/schema.test.ts" line="26" assertions="1" />
     </testsuite>
   </testsuite>
 </testsuites>
