@@ -1,0 +1,144 @@
+{
+  "labels": [
+    {
+      "name": "Type:Bug",
+      "color": "d73a4a",
+      "description": "Something isn't working"
+    },
+    {
+      "name": "Type:Enhancement",
+      "color": "a2eeef",
+      "description": "New feature or request"
+    },
+    {
+      "name": "Type:Documentation",
+      "color": "0075ca",
+      "description": "Improvements or additions to documentation"
+    },
+    {
+      "name": "Type:Performance",
+      "color": "1d76db",
+      "description": "Performance improvements and optimizations"
+    },
+    {
+      "name": "Type:Security",
+      "color": "ee0701",
+      "description": "Security-related issues or improvements"
+    },
+    {
+      "name": "Priority:Critical",
+      "color": "b60205",
+      "description": "Critical priority - requires immediate attention"
+    },
+    {
+      "name": "Priority:High",
+      "color": "e11d21",
+      "description": "High priority - important to address soon"
+    },
+    {
+      "name": "Priority:Medium",
+      "color": "fbca04",
+      "description": "Medium priority - normal workflow"
+    },
+    {
+      "name": "Priority:Low",
+      "color": "7057ff",
+      "description": "Low priority - nice to have"
+    },
+    {
+      "name": "Status:Needs-Review",
+      "color": "ff9800",
+      "description": "Waiting for review"
+    },
+    {
+      "name": "Status:In-Progress",
+      "color": "006b75",
+      "description": "Currently being worked on"
+    },
+    {
+      "name": "Status:Blocked",
+      "color": "5319e7",
+      "description": "Blocked by dependencies or issues"
+    },
+    {
+      "name": "Status:Ready-to-Merge",
+      "color": "2ecc71",
+      "description": "Ready to be merged"
+    },
+    {
+      "name": "Scope:GOV",
+      "color": "28a745",
+      "description": "Related to GOV header system"
+    },
+    {
+      "name": "Scope:ETL",
+      "color": "f66a0a",
+      "description": "Related to ETL pipelines"
+    },
+    {
+      "name": "Scope:DASHBOARD",
+      "color": "0969da",
+      "description": "Related to dashboard components"
+    },
+    {
+      "name": "Scope:CI-CD",
+      "color": "8250df",
+      "description": "Related to CI/CD workflows"
+    },
+    {
+      "name": "Component:Validation",
+      "color": "cfd3d7",
+      "description": "Header validation components"
+    },
+    {
+      "name": "Component:Templates",
+      "color": "c2e0c6",
+      "description": "PR and issue templates"
+    },
+    {
+      "name": "Component:Workflows",
+      "color": "bfdadc",
+      "description": "GitHub Actions workflows"
+    },
+    {
+      "name": "Size:XS",
+      "color": "ededed",
+      "description": "Tiny change (0-10 lines)"
+    },
+    {
+      "name": "Size:S",
+      "color": "fef2c0",
+      "description": "Small change (11-30 lines)"
+    },
+    {
+      "name": "Size:M",
+      "color": "d4c5f9",
+      "description": "Medium change (31-100 lines)"
+    },
+    {
+      "name": "Size:L",
+      "color": "c5def5",
+      "description": "Large change (101-500 lines)"
+    },
+    {
+      "name": "Size:XL",
+      "color": "bfd4f2",
+      "description": "Extra large change (500+ lines)"
+    },
+    {
+      "name": "GOV-RULES",
+      "color": "b91a0a",
+      "description": "Issues related to GOV rule enforcement"
+    },
+    {
+      "name": "GOV-HEADERS",
+      "color": "f9d0c4",
+      "description": "Header validation and grepable tags"
+    },
+    {
+      "name": "AI-CATALOG",
+      "color": "ffab70",
+      "description": "AI catalog and metadata management"
+    }
+  ]
+}
