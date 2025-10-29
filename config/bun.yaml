@@ -290,6 +290,73 @@ api:
       summary: AJAX endpoint for manager tools
       sourcemap: true
 
+    # Unified SQL API Routes
+    - path: /api/sql/query
+      method: POST
+      id: unified-sql-query
+      handler: ./routes/sql/query.ts
+      auth: jwt
+      request:
+        schema: SQLQueryRequest
+        required: true
+      response:
+        200: { schema: SQLQueryResponse }
+        401: { schema: Error }
+        500: { schema: SQLError }
+      tags: [sql, database, unified]
+      summary: Unified SQL query endpoint
+      sourcemap: true
+
+    - path: /api/sql/users
+      method: GET
+      id: sql-users-list
+      handler: ./routes/sql/users.ts
+      auth: jwt
+      parameters:
+        - name: limit
+          in: query
+          schema: { type: number }
+        - name: offset
+          in: query
+          schema: { type: number }
+      response:
+        200: { schema: SQLUsersResponse }
+        401: { schema: Error }
+      tags: [sql, users, database]
+      summary: SQL-based user listing
+      sourcemap: true
+
+    - path: /api/sql/analytics
+      method: GET
+      id: sql-analytics
+      handler: ./routes/sql/analytics.ts
+      auth: jwt
+      parameters:
+        - name: startDate
+          in: query
+          schema: { type: string, format: date }
+        - name: endDate
+          in: query
+          schema: { type: string, format: date }
+      response:
+        200: { schema: SQLAnalyticsResponse }
+        401: { schema: Error }
+      tags: [sql, analytics, reports]
+      summary: SQL analytics and reporting
+      sourcemap: true
+
+    - path: /api/sql/health
+      method: GET
+      id: sql-health-check
+      handler: ./routes/sql/health.ts
+      auth: jwt
+      response:
+        200: { schema: SQLHealthResponse }
+        401: { schema: Error }
+      tags: [sql, health, monitoring]
+      summary: Database health and performance metrics
+      sourcemap: true
+
 # Enhanced Authentication & Security Configuration
 security:
   scanner: "@socketsecurity/bun-security-scanner"
