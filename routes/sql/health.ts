@@ -1,12 +1,5 @@
-// [GOV][SQL][HEALTH-CHECK][SQL-HEALTH-001][v3.0][LIVE]
-// Grepable: [gov-sql-health-check-sql-health-001-v3.0-live]
-// routes/sql/health.ts - Database health and performance monitoring
-// 🛡️ **Maintainers**: @syndicate-gov/sql-team
-// 🎯 **Semantic Tag**: 🟢 [GOV][SQL][HEALTH-CHECK][TYPESCRIPT]
-// 📊 **Coverage**: Database health metrics and performance monitoring
-
 import { z } from 'zod';
-import { Database } from 'bun:sqlite';
+import { getDatabase } from '../../src/database/index.js';
 
 // Response schema
 const SQLHealthResponseSchema = z.object({
@@ -41,52 +34,15 @@ const SQLHealthResponseSchema = z.object({
 
 type SQLHealthResponse = z.infer<typeof SQLHealthResponseSchema>;
 
-// Initialize database connection
-const db = new Database(':memory:');
-
-// Create sample tables for health monitoring
-db.exec(`
-  CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    username TEXT UNIQUE NOT NULL,
-    email TEXT UNIQUE NOT NULL,
-    role TEXT NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-  );
-  
-  CREATE TABLE IF NOT EXISTS analytics (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    event_type TEXT NOT NULL,
-    user_id INTEGER,
-    metadata TEXT,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-  );
-  
-  CREATE TABLE IF NOT EXISTS health_log (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    check_time DATETIME DEFAULT CURRENT_TIMESTAMP,
-    status TEXT,
-    query_time INTEGER
-  );
-  
-  INSERT OR IGNORE INTO users (username, email, role) VALUES 
-    ('admin', 'admin@syndicate.gov', 'admin'),
-    ('nolarose', 'nolarose@syndicate.gov', 'manager'),
-    ('agent_smith', 'agent.smith@syndicate.gov', 'agent');
-    
-  INSERT OR IGNORE INTO analytics (event_type, user_id, metadata) VALUES 
-    ('login', 1, '{"ip": "127.0.0.1"}'),
-    ('bet_placed', 2, '{"amount": 100}'),
-    ('report_generated', 1, '{"type": "daily"}');
-`);
-
 // Track startup time
 const startTime = new Date().toISOString();
 
 export const handle = async (req: Request) => {
   const queryStartTime = Date.now();
-  
+
   try {
+    const db = getDatabase();
+
     // Perform health check queries
     const testQuery = 'SELECT 1 as test';
     const testResult = db.query(testQuery).get();

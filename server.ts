@@ -105,6 +105,12 @@ class APIServer {
       const handler = await this.loadHandler(route.handler);
       const params = this.extractParams(route.path, path);
       
+      // Extract query parameters
+      const query: Record<string, string> = {};
+      for (const [key, value] of url.searchParams) {
+        query[key] = value;
+      }
+
       // Auth middleware (mock)
       if (route.auth && route.auth !== 'csrf') {
         // In production, implement actual auth logic
@@ -113,7 +119,7 @@ class APIServer {
 
       // Call handler
       if (typeof handler.handle === 'function') {
-        return await handler.handle(req, { params, route, url });
+        return await handler.handle(req, { params, route, url, query });
       }
 
       return new Response('Handler not found', { status: 500 });
