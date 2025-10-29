@@ -127,3 +127,9 @@ console.log('✅ Route suggestions generated successfully');
 
 // Telemetry egress (fire-and-forget)
 fetch(process.env.CITADEL_TELEMETRY_URL || '', { method: 'POST', body: JSON.stringify({ count: newRoutes.length, ts: Date.now() }), headers: { 'Content-Type': 'application/json' } }).catch(()=>{});
+
+// Prometheus metric side-car (optional)
+if (process.env.PROMETHEUS_PUSHGATEWAY) {
+  const routeCount = newRoutes.length;
+  Bun.spawn(['sh', '-c', `echo "citadel_suggestions_total ${routeCount}" | curl --data-binary @- ${process.env.PROMETHEUS_PUSHGATEWAY}/metrics/job/citadel`], { stdout: 'ignore', stderr: 'ignore' }).catch(()=>{});
+}

@@ -1,0 +1,15 @@
+name: citadel-bump
+on:
+  push:
+    tags: ["v*.*.*"]
+jobs:
+  open-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo "Bump Citadel to ${{ github.ref_name }}" > body.txt
+      - uses: peter-evans/create-pull-request@v6
+        with:
+          title: "chore: bump Citadel to ${{ github.ref_name }}"
+          body-path: body.txt
+          branch: bump/citadel-${{ github.ref_name }}
