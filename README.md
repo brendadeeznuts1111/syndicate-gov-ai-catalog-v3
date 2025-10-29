@@ -57,24 +57,24 @@ The **Enterprise Supreme AI-Catalog v3.0 Immortal** is the world's most advanced
 
 ```bash
 # ⚡ Try it now - zero configuration needed!
-git clone https://github.com/enterprise-supreme/ai-catalog-v3.git
-cd ai-catalog-v3
-bun install
+git clone https://github.com/brendadeeznuts1111/syndicate-gov-ai-catalog-v3.git
+cd syndicate-gov-ai-catalog-v3
+bun install  # ← Automatic environment setup & validation
 
-# 🎯 AI-powered validation in 0.01ms
-time bun run ai:validate
+# 🚀 See all Bun 1.3.1 superpowers in action
+bun run 🚀 demo
 
-# 🔍 Search 10k files with AI in 45ms  
-time bun run search:semantic
+# 🔐 Test encrypted environment management
+export CITADEL_AGE_KEY="your-key" && bun run 🔓 env:unlock
 
-# 🛡️ Quantum-safe security scan
-bun run phase3:quantum --post-quantum --report
+# 🧪 Run comprehensive test suite
+bun test --coverage
 
-# 📊 Generate BI dashboard
-bun run citadel:dashboard --realtime --executive
+# 📊 Generate analytics report
+bun run scripts/test-analytics.ts
 ```
 
-**💡 Pro tip**: Run `bun run commands:wizard` for interactive command exploration!
+**💡 Pro tip**: Run `bun run 🔧 env:check` to validate your environment setup!
 
 ### **🌟 Core Capabilities**
 
@@ -120,6 +120,13 @@ bun run citadel:dashboard --realtime --executive
 - ✅ **AI Validation Engine** - [Real-time AI validation and confidence scoring](docs/02-ai-intelligence/AI-IMPLEMENTATION-SUMMARY.md)
 - ✅ **AI-Powered Search** - [Semantic search with AI classification](docs/02-ai-intelligence/README.md)
 - ✅ **Machine Learning Optimization** - [Automated performance tuning](docs/02-ai-intelligence/README.md)
+
+### **🔐 Environment Management System (v1.15)**
+- ✅ **Encrypted Environment Files** - [Age-encrypted .env.citadel with automatic decryption](docs/01-getting-started/REFERENCE.md#environment-variables-ref)
+- ✅ **Type-Safe Environment Variables** - [TypeScript autocompletion for all Citadel settings](src/env.d.ts)
+- ✅ **Zero-Config Setup** - [Automatic environment template copying and validation](scripts/env-unlock.ts)
+- ✅ **Privacy-Respecting Telemetry** - [DO_NOT_TRACK gate with silent failure handling](scripts/telemetry.ts)
+- ✅ **Bun-Native Environment Lock** - [Cache-safe, telemetry-free configuration optimized for Bun 1.3.1](scripts/env-unlock.ts)
 
 ### **🔐 Quantum Security System**
 - ✅ **Post-Quantum Cryptography** - [CRYSTALS algorithms for quantum resistance](docs/03-quantum-security/README.md)
@@ -211,19 +218,70 @@ syndicate-citadel/
 
 ## 🚀 **Quick Start**
 
-### **📦 Installation**
+### **📦 Zero-Config Installation**
 
 ```bash
 # Clone the repository
-git clone https://github.com/syndicate-gov/syndicate-citadel.git
-cd syndicate-citadel
+git clone https://github.com/brendadeeznuts1111/syndicate-gov-ai-catalog-v3.git
+cd syndicate-gov-ai-catalog-v3
 
-# Install dependencies
+# Install dependencies (automatic environment setup)
 bun install
-
-# Initialize Citadel
-bun run citadel:init
 ```
+
+**What happens automatically during `bun install`:**
+- ✅ Environment template copied from `.env.example`
+- ✅ Encrypted secrets decrypted if `CITADEL_AGE_KEY` provided
+- ✅ TypeScript environment types validated
+- ✅ System components verified
+- ✅ Telemetry configured (respects `DO_NOT_TRACK=1`)
+
+### **🎯 Run Your First Demo**
+
+```bash
+# See all Bun 1.3.1 superpowers in action
+bun run 🚀 demo
+
+# Output: 🚀 Citadel demo – Testing Bun 1.3.1 superpowers
+# ✅ Type safety validated
+# ✅ Serial execution confirmed  
+# ✅ Snapshots working
+# ✅ Quiet mode functional
+# ✅ Demo complete – Bun 1.3.1 superpowers active!
+```
+
+### **🔐 Production Setup (Optional)**
+
+```bash
+# Set up encrypted environment for production
+export CITADEL_AGE_KEY="your-age-encryption-key"
+
+# Create encrypted secrets file
+age -r $(age-keygen -y key.txt) .env > .env.citadel
+
+# Install with automatic decryption
+bun install  # ← Decrypts .env.citadel automatically
+```
+
+### **🧪 Validate Your Setup**
+
+```bash
+# Check environment configuration
+bun run 🔧 env:check
+
+# Run comprehensive test suite
+bun test --coverage
+
+# Generate analytics report
+bun run scripts/test-analytics.ts
+```
+
+### **📚 Complete Documentation**
+
+- **[📖 Getting Started Guide](docs/01-getting-started/GETTING-STARTED.md)** - Comprehensive setup and configuration
+- **[📋 Reference Documentation](docs/01-getting-started/REFERENCE.md)** - All variables, constants, and interfaces
+- **[🧪 Testing Guide](docs/04-testing/TESTING-GUIDE.md)** - Advanced testing techniques
+- **[🔐 Security Documentation](docs/03-quantum-security/README.md)** - Security best practices
 
 ### **🎯 Basic Usage**
 
