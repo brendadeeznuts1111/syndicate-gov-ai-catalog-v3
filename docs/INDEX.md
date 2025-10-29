@@ -112,10 +112,11 @@ Complete index of all documentation for Enterprise Supreme AI-Catalog v3.0 Immor
 | Document | Description | Complexity |
 |----------|-------------|------------|
 | [📖 Package Management README](./12-package-management/README.md) | Dependency and monorepo management overview | Intermediate |
-| [📋 Dependency Management](./12-package-management/01-dependency-management.md) | Comprehensive dependency management with recursive tracking | Intermediate |
+| [📋 Dependency Management](./12-package-management/01-dependency-management.md) | Comprehensive dependency management with official Bun catalogs | Intermediate |
 | [🔍 Dependency Analysis](./12-package-management/02-dependency-analysis.md) | Dependency chain analysis using `bun why` command | Intermediate |
 | [📊 Depth Analysis](./12-package-management/03-depth-analysis.md) | Multi-level dependency analysis with `--depth` parameter | Advanced |
-| [🏗️ Monorepo Workspaces](./12-package-management/04-monorepo-workspaces.md) | Monorepo workspace management with `--filter` flag | Advanced |
+| [🏗️ Monorepo Workspaces](./12-package-management/04-monorepo-workspaces.md) | Monorepo workspace management with official Bun patterns | Advanced |
+| [🔗 Local Development Linking](./12-package-management/05-local-development-linking.md) | Local package development with `bun link` for rapid testing | Intermediate |
 
 ### **🔒 Security Auditing** (`/13-security-auditing/`)
 | Document | Description | Complexity |

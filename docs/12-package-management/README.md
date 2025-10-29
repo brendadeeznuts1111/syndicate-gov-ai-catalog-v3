@@ -14,10 +14,11 @@ Complete documentation for enterprise package management, dependency analysis, a
 
 | Guide | Focus | Key Features | Status |
 |-------|-------|--------------|--------|
-| [01-dependency-management.md](./01-dependency-management.md) | Comprehensive dependency management | Recursive tracking, updates, performance metrics | ✅ Complete |
+| [01-dependency-management.md](./01-dependency-management.md) | Comprehensive dependency management | Official Bun catalogs, recursive tracking, updates | ✅ Complete |
 | [02-dependency-analysis.md](./02-dependency-analysis.md) | Dependency chain analysis | `bun why` command, workspace-specific analysis | ✅ Complete |
 | [03-depth-analysis.md](./03-depth-analysis.md) | Multi-level dependency analysis | `--depth` parameter, performance optimization | ✅ Complete |
-| [04-monorepo-workspaces.md](./04-monorepo-workspaces.md) | Monorepo workspace management | `--filter` flag, workspace operations | ✅ Complete |
+| [04-monorepo-workspaces.md](./04-monorepo-workspaces.md) | Monorepo workspace management | Official Bun workspace patterns, `--filter` flag | ✅ Complete |
+| [05-local-development-linking.md](./05-local-development-linking.md) | Local package development | `bun link` for rapid development and testing | ✅ Complete |
 
 ---
 
@@ -29,6 +30,13 @@ Complete documentation for enterprise package management, dependency analysis, a
 - **Workspace Filtering**: Targeted package operations
 - **Performance Optimization**: Sub-second dependency operations
 - **Security Integration**: Vulnerability management and updates
+
+### **🔗 Local Development**
+
+- **Package Linking**: `bun link` for rapid local development
+- **Symlink Management**: Efficient local package testing
+- **Cross-Workspace Development**: Test changes across multiple workspaces
+- **Production Transition**: Seamless switch from development to production
 
 ### **🔍 Analysis Tools**
 
@@ -47,6 +55,19 @@ Complete documentation for enterprise package management, dependency analysis, a
 ---
 
 ## ⚡ **Quick Start**
+
+### **🔗 Local Development**
+
+```bash
+# Register local package for development
+cd packages/dashboard && bun link
+
+# Link into target project
+cd packages/gov-rules && bun link @syndicate/dashboard --save
+
+# Test local changes immediately
+bun run dev
+```
 
 ### **🔍 Basic Dependency Analysis**
 
