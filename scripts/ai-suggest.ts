@@ -70,7 +70,7 @@ export const handle = async (req: Request, { params }: { params: any }) => {
 `;
 }
 
-const cfgText = await Bun.file('config/bun.yaml').text();
+const cfgText = await Bun.file('config/minimal-bun.yaml').text();
 const cfg     = YAML.parse(cfgText);
 const aiCfg   = cfg.ai?.suggester;
 if (!aiCfg?.enabled) process.exit(0);
@@ -133,3 +133,6 @@ if (process.env.PROMETHEUS_PUSHGATEWAY) {
   const routeCount = newRoutes.length;
   Bun.spawn(['sh', '-c', `echo "citadel_suggestions_total ${routeCount}" | curl --data-binary @- ${process.env.PROMETHEUS_PUSHGATEWAY}/metrics/job/citadel`], { stdout: 'ignore', stderr: 'ignore' }).catch(()=>{});
 }
+
+// Immediate pipeline refresh
+await $`bun run api:schemas`.quiet();

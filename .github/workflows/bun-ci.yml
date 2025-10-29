@@ -328,6 +328,16 @@ jobs:
           bun run citadel:database:performance:test
           bun run citadel:cache:performance:test
 
+      - name: Test Interactive Docs & Wand Endpoints
+        run: |
+          echo "📚 Testing interactive docs and wand endpoints..."
+          bun run ci
+          bun run api:validate
+          curl -f http://localhost:3000/_docs || exit 1
+          curl -f http://localhost:3000/wand/reload -H "Authorization: Bearer ${WAND_TOKEN}" || exit 1
+        env:
+          WAND_TOKEN: ${{ secrets.WAND_TOKEN }}
+
       - name: Simulate WebSocket Broadcast
         run: |
           echo "🌐 Simulating WebSocket broadcast..."

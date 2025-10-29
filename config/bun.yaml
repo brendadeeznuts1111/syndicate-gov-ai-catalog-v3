@@ -4,7 +4,6 @@ catalog:
   typescript: "5.0.4"
   zod: "3.24.1"
   uuid: "10.0.0"
-catalogs:
   testing:
     jest: 29.6.2
     react-testing-library: 14.0.0
@@ -29,6 +28,11 @@ api:
         description: Production Vault
       - url: ws://localhost:3003
         description: Local WS Broadcast
+  docs:
+    enabled: true
+    path: /_docs        # Swagger UI
+    redoc: /_redoc      # ReDoc (optional)
+    openapi: /openapi.yaml
   routes:
     - path: /config/{hash}
       method: GET
@@ -80,6 +84,20 @@ api:
       tags: [config, validate]
       summary: Schema-check YAML before store
       sourcemap: true
+
+    - path: /wand/{action}
+      method: GET
+      id: wand-admin-actions
+      handler: ./routes/wand.ts
+      auth: admin
+      response:
+        200: { schema: WandResponse }
+        401: { schema: Error }
+        404: { schema: Error }
+      tags: [admin, wand]
+      summary: Admin wand: reload, diff, rollback
+      sourcemap: true
+
 # Enhanced Authentication & Security Configuration
 security:
   scanner: "@socketsecurity/bun-security-scanner"
