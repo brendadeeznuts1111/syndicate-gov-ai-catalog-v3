@@ -50,7 +50,7 @@
     "ai:consolidated": "bun run src/citadel/registry/yaml-registry-consolidated.ts",
     "ai:suggest": "bun run scripts/ai-suggest.ts",
     "ai:schedule": "bun run scripts/ai-schedule.ts",
-    "api:gen": "bun run scripts/gen-openapi.ts",
+    "api:gen": "bun run scripts/gen-openapi-schemas.ts",
     "api:schemas": "bun run scripts/gen-openapi-schemas.ts",
     "api:validate": "bun run scripts/validate-api.ts",
     "api:grep": "rg --type ts 'export const handle' --colors path:fg:cyan",
