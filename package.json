@@ -98,6 +98,7 @@
     "🧪 bun:test:ai-quiet": "CLAUDECODE=1 bun test --only-failures --pass-with-no-tests",
     "🧪 bun:test:types": "bun test ./tests/types.test.ts",
     "🧪 bun:test:serial": "bun test ./tests/accounting-serial.test.ts",
+    "📊 coverage:badge": "./scripts/coverage-badge.sh",
     "ci": "bun run server.ts",
     "🔧 bun:preload": "BUN_INSPECT_PRELOAD=\"./scripts/preload/setup.ts\" bun run dev",
     "🗄️ bun:sql-preconnect": "DATABASE_URL=\"${DATABASE_URL}\" bun --sql-preconnect run dev",
