@@ -47,3 +47,22 @@ rerun_each = 5
 randomize = true
 # Set system time for deterministic tests
 mock_time = true
+
+# Ultra-locked gate v1.10 configuration
+[ultra_locked]
+# Per-test GC pressure tracking
+gc_pressure_threshold = 15.0
+# Async resource leak delta threshold
+async_leak_threshold = 0
+# Deterministic coverage hash
+coverage_hash_enabled = true
+# Mutation testing dry run
+mutation_dryrun = true
+# Enhanced memory monitoring
+memory_monitoring = true
+# Source map integrity checks
+sourcemap_integrity = true
+# Timezone matrix testing
+timezone_matrix = ["UTC", "America/New_York", "Europe/Berlin"]
+# Smol mode for GC forcing
+smol_mode = true

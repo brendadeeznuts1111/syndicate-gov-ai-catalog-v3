@@ -159,7 +159,7 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Run Bun Native Tests
-        run: bun run bun:test:ci
+        run: bun run 🧪 bun:test:ci:v1.10
 
       - name: Upload Coverage Reports
         uses: actions/upload-artifact@v4
@@ -487,6 +487,29 @@ jobs:
           echo "📊 Testing enterprise monitoring systems..."
           bun run monitoring:health:check
           bun run monitoring:alerts:test
+
+  ai-tag-matrix:
+    name: AI Tag Matrix Testing - Self-Organizing Tests
+    runs-on: ubuntu-latest
+    needs: [validate-headers, test-dashboard]
+    strategy:
+      matrix:
+        tag: [RUNTIME, ACCOUNTING, ODD-MOVEMENT]
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Bun 1.3
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.0
+          cache: 'bun'
+
+      - name: Install Dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Run Tag-Specific Tests
+        run: TAG_FILTER=${{ matrix.tag }} bun test ./tests/tag-matrix.test.ts --only-failures --pass-with-no-tests
 
   pr-enforcement:
     name: Enterprise PR Enforcement with Database Integration

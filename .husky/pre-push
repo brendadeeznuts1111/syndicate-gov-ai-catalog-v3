@@ -1,0 +1,16 @@
+#!/bin/sh
+# .husky/pre-push - Optional pre-push hook for ultra-locked validation
+
+. "$(dirname "$0")/_/husky.sh"
+
+echo "🔒 Pre-push hook: Running ultra-locked validation..."
+
+# Run the ultra-locked check script
+if [ -f "./scripts/ultra-locked-check.sh" ]; then
+    ./scripts/ultra-locked-check.sh
+else
+    # Fallback to individual tests
+    bun test tests/gc-pressure.test.ts tests/async-resource-delta.test.ts tests/coverage-hash.test.ts
+fi
+
+exit 0
