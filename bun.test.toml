@@ -1,4 +1,4 @@
-# bun.test.toml - Citadel Test Configuration
+# bun.test.toml - Citadel Test Configuration (Latest Bun Best Practices)
 
 [test]
 # Test file patterns
@@ -9,6 +9,7 @@ test_ignore = ["**/node_modules/**", "**/dist/**"]
 coverage = true
 coverage_dir = "./coverage"
 coverage_threshold = 80
+coverage_reporter = ["text", "html"]
 
 # Reporter configuration
 reporter = ["dots", "junit"]
@@ -31,6 +32,18 @@ watch = false
 [ci]
 coverage = true
 coverage_threshold = 85
+coverage_reporter = ["text", "lcov", "html"]
 reporter = ["junit", "html"]
 timeout = 60000
 concurrency = 2
+
+# Advanced test configuration
+[advanced]
+# Bail early after N failures (for CI)
+bail = 3
+# Re-run each test N times to catch flakes
+rerun_each = 5
+# Randomize test order with seed
+randomize = true
+# Set system time for deterministic tests
+mock_time = true
