@@ -81,6 +81,8 @@
     "ai:registry:broadcast": "bun run src/citadel/registry/ai-registry-adapter.ts --store --broadcast",
     "ai:registry:vault": "bun run src/citadel/registry/ai-registry-adapter.ts --store --broadcast --vault-sync",
     "ai:registry:benchmark": "bun run src/citadel/registry/ai-registry-adapter.ts --benchmark",
+    "ai:consolidated": "bun run src/citadel/registry/yaml-registry-consolidated.ts",
+    "ai:consolidated:benchmark": "bun run src/citadel/registry/yaml-registry-consolidated.ts --benchmark",
     "housekeep": "bun run scripts/housekeep.ts",
     "repo:setup": "bun run scripts/repo-setup.ts",
     "repo:labels": "bun run scripts/repo-setup.ts labels",
