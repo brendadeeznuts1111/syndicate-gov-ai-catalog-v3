@@ -60,6 +60,16 @@
     "💡 innovation:submit": "bun run scripts/innovation-submit.ts --idea $1 --category $2",
     "🔬 innovation:lab": "bun run scripts/innovation-lab.ts --access --collaborate",
 
+    "// ===== AUTHENTICATION & SECURITY ===== //": "",
+    "🔐 auth:setup": "bun run scripts/auth-setup.ts setup",
+    "🔑 auth:validate": "bun run scripts/auth-setup.ts validate",
+    "🔗 auth:google": "bun run scripts/auth-setup.ts google",
+    "🧪 auth:test": "bun run scripts/auth-setup.ts test",
+    "📡 auth:endpoints": "bun run scripts/auth-setup.ts endpoints",
+    "🛡️ auth:generate-secrets": "bun run scripts/auth-setup.ts setup",
+    "🔒 auth:check": "bun run scripts/auth-setup.ts validate && bun run validate:security",
+    "🔐 auth:full-setup": "bun run auth:setup && bun run auth:validate && bun run auth:test",
+
     "// ===== VALIDATION & SECURITY ===== //": "",
     "🛡️ validate:quick": "bun run validate:headers --quick --silent",
     "🔒 validate:security": "bun run validate:sandbox --strict",

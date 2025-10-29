@@ -1,0 +1,378 @@
+# Citadel Authentication Configuration
+# [AUTH][CONFIG][YAML][AUTH-CONFIG-001][v3.0][LIVE]
+# Grepable: [auth-config-yaml-auth-config-001-v3.0-live]
+
+# JWT Cookie Authentication Configuration
+jwt:
+  enabled: true
+  secret: "${JWT_SECRET}"
+  algorithm: "HS256"
+  expiresIn: "24h"
+  refreshExpiresIn: "7d"
+  issuer: "citadel.syndicate.gov"
+  audience: "citadel-users"
+  
+  # Token Generation
+  tokens:
+    accessToken:
+      secret: "${JWT_ACCESS_SECRET}"
+      expiresIn: "15m"
+      algorithm: "HS256"
+      
+    refreshToken:
+      secret: "${JWT_REFRESH_SECRET}"
+      expiresIn: "7d"
+      algorithm: "HS256"
+      
+    idToken:
+      secret: "${JWT_ID_SECRET}"
+      expiresIn: "1h"
+      algorithm: "HS256"
+
+# Secure Cookie Configuration
+cookies:
+  # JWT Access Token Cookie
+  accessToken:
+    name: "citadel_access_token"
+    secure: "${COOKIE_SECURE:true}"
+    httpOnly: true
+    sameSite: "strict"
+    domain: "${COOKIE_DOMAIN:localhost}"
+    path: "/"
+    maxAge: 900  # 15 minutes
+    
+  # JWT Refresh Token Cookie
+  refreshToken:
+    name: "citadel_refresh_token"
+    secure: "${COOKIE_SECURE:true}"
+    httpOnly: true
+    sameSite: "strict"
+    domain: "${COOKIE_DOMAIN:localhost}"
+    path: "/api/auth/refresh"
+    maxAge: 604800  # 7 days
+    
+  # Session Cookie
+  session:
+    name: "citadel_session"
+    secure: "${COOKIE_SECURE:true}"
+    httpOnly: true
+    sameSite: "strict"
+    domain: "${COOKIE_DOMAIN:localhost}"
+    path: "/"
+    maxAge: 86400  # 24 hours
+
+# Google OAuth2 Configuration
+google:
+  enabled: true
+  clientId: "${GOOGLE_CLIENT_ID}"
+  clientSecret: "${GOOGLE_CLIENT_SECRET}"
+  redirectUri: "${GOOGLE_REDIRECT_URI:http://localhost:3000/auth/google/callback}"
+  
+  # OAuth2 Scopes
+  scope:
+    - "openid"
+    - "profile"
+    - "email"
+    - "https://www.googleapis.com/auth/userinfo.email"
+    - "https://www.googleapis.com/auth/userinfo.profile"
+    
+  # Google API Configuration
+  api:
+    userInfo: "https://www.googleapis.com/oauth2/v2/userinfo"
+    tokenInfo: "https://www.googleapis.com/oauth2/v2/tokeninfo"
+    
+  # Token Configuration
+  tokens:
+    accessToken:
+      url: "https://oauth2.googleapis.com/token"
+      grantType: "authorization_code"
+      
+    refreshToken:
+      url: "https://oauth2.googleapis.com/token"
+      grantType: "refresh_token"
+
+# Session Management
+session:
+  enabled: true
+  store: "redis"  # redis, memory, database
+  secret: "${SESSION_SECRET}"
+  
+  # Session Configuration
+  config:
+    name: "citadel_session"
+    ttl: 86400  # 24 hours
+    rolling: true
+    saveUninitialized: false
+    resave: false
+    
+  # Redis Configuration (if using redis store)
+  redis:
+    host: "${REDIS_HOST:localhost}"
+    port: "${REDIS_PORT:6379}"
+    db: 1  # Separate database for sessions
+    password: "${REDIS_PASSWORD:}"
+    keyPrefix: "citadel:session:"
+    
+  # Memory Configuration (if using memory store)
+  memory:
+    maxSessions: 1000
+    cleanupInterval: 3600000  # 1 hour
+
+# Multi-Provider Authentication
+providers:
+  # JWT Authentication Provider
+  jwt:
+    enabled: true
+    priority: 1
+    name: "JWT"
+    
+    endpoints:
+      login: "/api/auth/login"
+      refresh: "/api/auth/refresh"
+      logout: "/api/auth/logout"
+      verify: "/api/auth/verify"
+      
+    # JWT Strategy Configuration
+    strategy:
+      extractFrom: ["header", "cookie"]
+      headerScheme: "Bearer"
+      cookieName: "citadel_access_token"
+      
+  # Google OAuth Provider
+  google:
+    enabled: true
+    priority: 2
+    name: "Google OAuth"
+    
+    endpoints:
+      login: "/api/auth/google"
+      callback: "/api/auth/google/callback"
+      logout: "/api/auth/google/logout"
+      
+    # OAuth Strategy Configuration
+    strategy:
+      state: true
+      nonce: true
+      prompt: "consent"
+      accessType: "offline"
+      
+  # Basic Authentication Provider (fallback)
+  basic:
+    enabled: false
+    priority: 3
+    name: "Basic Auth"
+    
+    endpoints:
+      login: "/api/auth/basic/login"
+      logout: "/api/auth/basic/logout"
+      
+    # Basic Strategy Configuration
+    strategy:
+      realm: "Citadel Authentication"
+      challenge: true
+
+# CORS Configuration for Auth Endpoints
+cors:
+  enabled: true
+  
+  # Allowed Origins
+  origins: 
+    - "${FRONTEND_URL:http://localhost:3000}"
+    - "${DASHBOARD_URL:http://localhost:3001}"
+    - "${API_URL:http://localhost:8080}"
+    
+  # HTTP Methods
+  methods: 
+    - "GET"
+    - "POST"
+    - "PUT"
+    - "DELETE"
+    - "OPTIONS"
+    - "PATCH"
+    
+  # Allowed Headers
+  allowedHeaders: 
+    - "Content-Type"
+    - "Authorization"
+    - "X-Requested-With"
+    - "X-CSRF-Token"
+    - "X-Session-ID"
+    
+  # Exposed Headers
+  exposedHeaders:
+    - "X-Total-Count"
+    - "X-Page-Count"
+    
+  # Credentials
+  credentials: true
+  
+  # Pre-flight Configuration
+  preflightContinue: false
+  optionsSuccessStatus: 204
+
+# Rate Limiting
+rateLimit:
+  enabled: true
+  
+  # General Rate Limiting
+  general:
+    windowMs: 900000  # 15 minutes
+    max: 100  # limit each IP to 100 requests per windowMs
+    message: "Too many requests, please try again later"
+    
+  # Auth-Specific Rate Limiting
+  auth:
+    login:
+      windowMs: 900000  # 15 minutes
+      max: 5  # limit login attempts
+      message: "Too many login attempts, please try again later"
+      
+    refresh:
+      windowMs: 3600000  # 1 hour
+      max: 50  # limit refresh attempts
+      message: "Too many refresh attempts, please try again later"
+      
+    registration:
+      windowMs: 3600000  # 1 hour
+      max: 3  # limit registration attempts
+      message: "Too many registration attempts, please try again later"
+      
+  # Rate Limiting Configuration
+  config:
+    standardHeaders: true
+    legacyHeaders: false
+    skipSuccessfulRequests: false
+    skipFailedRequests: false
+
+# Security Headers
+securityHeaders:
+  enabled: true
+  
+  # Header Configuration
+  headers:
+    # Content Security Policy
+    contentSecurityPolicy:
+      enabled: true
+      directives:
+        defaultSrc: ["'self'"]
+        scriptSrc: ["'self'", "'unsafe-inline'", "https://apis.google.com"]
+        styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"]
+        fontSrc: ["'self'", "https://fonts.gstatic.com"]
+        imgSrc: ["'self'", "data:", "https://lh3.googleusercontent.com"]
+        connectSrc: ["'self'", "https://accounts.google.com", "https://oauth2.googleapis.com"]
+        
+    # Cross-Origin Embedder Policy
+    crossOriginEmbedderPolicy: false
+    
+    # Cross-Origin Opener Policy
+    crossOriginOpenerPolicy: "same-origin"
+    
+    # Cross-Origin Resource Policy
+    crossOriginResourcePolicy: "cross-origin"
+    
+    # DNS Prefetch Control
+    dnsPrefetchControl: true
+    
+    # Expect-CT
+    expectCt:
+      enabled: false
+      maxAge: 86400
+      enforce: true
+      
+    # Feature Policy
+    featurePolicy:
+      enabled: false
+      
+    # Frame Options
+    frameguard:
+      action: "deny"
+      
+    # Hide Powered By
+    hidePoweredBy: true
+    
+    # HSTS
+    hsts:
+      enabled: true
+      maxAge: 31536000  # 1 year
+      includeSubDomains: true
+      preload: false
+      
+    # IE No Open
+    ieNoOpen: true
+    
+    # No Sniff
+    noSniff: true
+    
+    # Origin Agent Cluster
+    originAgentCluster: true
+    
+    # Permissions Policy
+    permissionsPolicy:
+      enabled: false
+      
+    # Referrer Policy
+    referrerPolicy:
+      policy: "strict-origin-when-cross-origin"
+      
+    # X-Content-Type-Options
+    xssProtection: true
+
+# CSRF Protection
+csrf:
+  enabled: true
+  secret: "${CSRF_SECRET}"
+  cookie:
+    name: "citadel_csrf_token"
+    secure: "${COOKIE_SECURE:true}"
+    httpOnly: false
+    sameSite: "strict"
+  header: "x-citadel-csrf-token"
+  ignoreMethods: ["GET", "HEAD", "OPTIONS"]
+
+# Session Cleanup & Maintenance
+maintenance:
+  # Session Cleanup
+  sessionCleanup:
+    enabled: true
+    interval: 3600000  # 1 hour
+    batchSize: 100
+    
+  # Token Cleanup
+  tokenCleanup:
+    enabled: true
+    interval: 86400000  # 24 hours
+    maxAge: 604800  # 7 days
+    
+  # Audit Logging
+  audit:
+    enabled: true
+    logLevel: "info"
+    events:
+      - "login"
+      - "logout"
+      - "token_refresh"
+      - "password_change"
+      - "account_locked"
+
+# Environment Variables Required
+environment:
+  required:
+    - "JWT_SECRET"
+    - "JWT_ACCESS_SECRET"
+    - "JWT_REFRESH_SECRET"
+    - "JWT_ID_SECRET"
+    - "SESSION_SECRET"
+    - "CSRF_SECRET"
+    - "GOOGLE_CLIENT_ID"
+    - "GOOGLE_CLIENT_SECRET"
+    
+  optional:
+    - "COOKIE_SECURE"
+    - "COOKIE_DOMAIN"
+    - "FRONTEND_URL"
+    - "DASHBOARD_URL"
+    - "API_URL"
+    - "REDIS_HOST"
+    - "REDIS_PORT"
+    - "REDIS_PASSWORD"
+    - "GOOGLE_REDIRECT_URI"

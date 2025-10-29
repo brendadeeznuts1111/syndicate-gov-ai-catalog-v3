@@ -15,9 +15,89 @@ workspaces:
     - "packages/*"
 registry:
   path: ~/.syndicate/registry
+# Enhanced Authentication & Security Configuration
 security:
   scanner: "@socketsecurity/bun-security-scanner"
   minimumReleaseAge: 604800
+  
+  # JWT Cookie Authentication
+  jwt:
+    enabled: true
+    secret: "${JWT_SECRET}"
+    algorithm: "HS256"
+    expiresIn: "24h"
+    refreshExpiresIn: "7d"
+    issuer: "citadel.syndicate.gov"
+    audience: "citadel-users"
+    
+  # Secure Cookie Configuration
+  cookies:
+    secure: "${COOKIE_SECURE:true}"
+    httpOnly: true
+    sameSite: "strict"
+    domain: "${COOKIE_DOMAIN:localhost}"
+    path: "/"
+    maxAge: 604800  # 7 days
+    
+  # Google OAuth2 Configuration
+  google:
+    enabled: true
+    clientId: "${GOOGLE_CLIENT_ID}"
+    clientSecret: "${GOOGLE_CLIENT_SECRET}"
+    redirectUri: "${GOOGLE_REDIRECT_URI:http://localhost:3000/auth/google/callback}"
+    scope: ["openid", "profile", "email"]
+    
+  # Session Management
+  session:
+    enabled: true
+    store: "redis"  # redis, memory, database
+    ttl: 86400  # 24 hours
+    secret: "${SESSION_SECRET}"
+    rolling: true
+    saveUninitialized: false
+    
+  # Multi-Provider Authentication
+  providers:
+    jwt:
+      enabled: true
+      priority: 1
+      endpoints:
+        login: "/api/auth/login"
+        refresh: "/api/auth/refresh"
+        logout: "/api/auth/logout"
+        
+    google:
+      enabled: true
+      priority: 2
+      endpoints:
+        login: "/api/auth/google"
+        callback: "/api/auth/google/callback"
+        logout: "/api/auth/google/logout"
+        
+    basic:
+      enabled: false
+      priority: 3
+      endpoints:
+        login: "/api/auth/basic/login"
+        
+  # CORS Configuration for Auth Endpoints
+  cors:
+    enabled: true
+    origins: 
+      - "${FRONTEND_URL:http://localhost:3000}"
+      - "${DASHBOARD_URL:http://localhost:3001}"
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"]
+    credentials: true
+    
+  # Rate Limiting
+  rateLimit:
+    enabled: true
+    windowMs: 900000  # 15 minutes
+    max: 100  # limit each IP to 100 requests per windowMs
+    message: "Too many authentication attempts, please try again later"
+    standardHeaders: true
+    legacyHeaders: false
 
 # Enhanced HEADER Logic Configuration
 rules:
