@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="bun test" tests="5" assertions="7" failures="0" skipped="0" time="0.086594">
+  <testsuite name="tests/citadel.test.ts" file="tests/citadel.test.ts" tests="5" assertions="7" failures="0" skipped="0" time="0" hostname="Mac.attlocal.net">
+    <testsuite name="Citadel CI Gate" file="tests/citadel.test.ts" line="5" tests="5" assertions="7" failures="0" skipped="0" time="0.068" hostname="Mac.attlocal.net">
+      <testcase name="idempotency" classname="Citadel CI Gate" time="0.037258" file="tests/citadel.test.ts" line="31" assertions="1" />
+      <testcase name="spec validity" classname="Citadel CI Gate" time="0.020229" file="tests/citadel.test.ts" line="40" assertions="1" />
+      <testcase name="docs serve" classname="Citadel CI Gate" time="0.005546" file="tests/citadel.test.ts" line="45" assertions="1" />
+      <testcase name="wand endpoints" classname="Citadel CI Gate" time="0.000522" file="tests/citadel.test.ts" line="50" assertions="2" />
+      <testcase name="yaml parsing" classname="Citadel CI Gate" time="0.006058" file="tests/citadel.test.ts" line="57" assertions="2" />
+    </testsuite>
+  </testsuite>
+</testsuites>

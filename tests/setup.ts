@@ -9,14 +9,25 @@ beforeAll(async () => {
   process.env.JWT_SECRET = 'test-jwt-secret';
   process.env.SESSION_SECRET = 'test-session-secret';
   
-  // Mock console methods in tests to reduce noise
-  global.console = {
-    ...console,
-    log: mock(() => {}),
-    info: mock(() => {}),
-    warn: mock(() => {}),
-    error: mock(() => {}),
-  };
+  // AI-friendly quiet mode - only show failures
+  if (process.env.CLAUDECODE === '1') {
+    global.console = {
+      ...console,
+      log: mock(() => {}),
+      info: mock(() => {}),
+      warn: mock(() => {}),
+      error: mock(() => {}),
+    };
+  } else {
+    // Normal test mode - mock console methods to reduce noise
+    global.console = {
+      ...console,
+      log: mock(() => {}),
+      info: mock(() => {}),
+      warn: mock(() => {}),
+      error: mock(() => {}),
+    };
+  }
 });
 
 afterAll(async () => {
