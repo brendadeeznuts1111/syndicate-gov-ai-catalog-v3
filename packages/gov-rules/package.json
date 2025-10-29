@@ -55,9 +55,8 @@
     "compliance:verify": "bun run src/scripts/compliance-verify.ts"
   },
   "dependencies": {
-    "@syndicate/core": "^3.0.3",
     "zod": "^3.24.3",
-    "uuid": "^10.0.2"
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "typescript": "^5.0.4",
