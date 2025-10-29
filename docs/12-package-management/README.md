@@ -19,6 +19,7 @@ Complete documentation for enterprise package management, dependency analysis, a
 | [03-depth-analysis.md](./03-depth-analysis.md) | Multi-level dependency analysis | `--depth` parameter, performance optimization | ✅ Complete |
 | [04-monorepo-workspaces.md](./04-monorepo-workspaces.md) | Monorepo workspace management | Official Bun workspace patterns, `--filter` flag | ✅ Complete |
 | [05-local-development-linking.md](./05-local-development-linking.md) | Local package development | `bun link` for rapid development and testing | ✅ Complete |
+| [06-pm-utilities.md](./06-pm-utilities.md) | Package manager utilities | `bun pm` toolkit for packing, analysis, and maintenance | ✅ Complete |
 
 ---
 
@@ -30,6 +31,13 @@ Complete documentation for enterprise package management, dependency analysis, a
 - **Workspace Filtering**: Targeted package operations
 - **Performance Optimization**: Sub-second dependency operations
 - **Security Integration**: Vulnerability management and updates
+
+### **🛠️ Package Manager Utilities**
+
+- **Tarball Creation**: `bun pm pack` for distributable packages
+- **Dependency Analysis**: `bun pm ls` for installed package inspection
+- **Version Management**: `bun pm version` for semantic versioning
+- **Package.json Management**: `bun pm pkg` for programmatic configuration
 
 ### **🔗 Local Development**
 
@@ -55,6 +63,23 @@ Complete documentation for enterprise package management, dependency analysis, a
 ---
 
 ## ⚡ **Quick Start**
+
+### **🛠️ Package Manager Utilities**
+
+```bash
+# Create distributable tarball
+bun pm pack --destination ./dist
+
+# List installed dependencies
+bun pm ls
+
+# Bump package version
+bun pm version patch
+
+# Manage package.json data
+bun pm pkg get name version
+bun pm pkg set scripts.build="esbuild src/index.ts"
+```
 
 ### **🔗 Local Development**
 

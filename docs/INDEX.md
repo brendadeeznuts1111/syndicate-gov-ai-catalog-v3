@@ -117,6 +117,7 @@ Complete index of all documentation for Enterprise Supreme AI-Catalog v3.0 Immor
 | [📊 Depth Analysis](./12-package-management/03-depth-analysis.md) | Multi-level dependency analysis with `--depth` parameter | Advanced |
 | [🏗️ Monorepo Workspaces](./12-package-management/04-monorepo-workspaces.md) | Monorepo workspace management with official Bun patterns | Advanced |
 | [🔗 Local Development Linking](./12-package-management/05-local-development-linking.md) | Local package development with `bun link` for rapid testing | Intermediate |
+| [🛠️ Package Manager Utilities](./12-package-management/06-pm-utilities.md) | Complete `bun pm` toolkit for packing, analysis, and maintenance | Advanced |
 
 ### **🔒 Security Auditing** (`/13-security-auditing/`)
 | Document | Description | Complexity |
