@@ -1,5 +1,5 @@
-# .github/workflows/bun-ci.yml - Enterprise Supreme CI v3.0 with Database Integration
-name: Enterprise Supreme CI - AI-Enhanced Governance & Database Integration
+# .github/workflows/bun-ci.yml - Organized Bun CI Testing Infrastructure v1.12
+name: Citadel Testing Suite - Organized Bun CI v1.12
 
 on:
   push:
@@ -254,6 +254,110 @@ jobs:
           name: tags-index
           path: .citadel/indexes/.tags.index
           retention-days: 7
+
+  test-unit:
+    name: Unit Tests - Fast Functions & Utilities
+    runs-on: ubuntu-latest
+    needs: validate-headers
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Bun 1.3
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.0
+          cache: 'bun'
+
+      - name: Install Dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Run Unit Tests
+        run: bun test tests/unit --coverage --reporter=junit --reporter-outfile=test-results-unit.xml
+
+      - name: Upload Unit Test Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: unit-test-results
+          path: test-results-unit.xml
+          retention-days: 7
+
+  test-integration:
+    name: Integration Tests - Service & API Interactions
+    runs-on: ubuntu-latest
+    needs: validate-headers
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Bun 1.3
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.0
+          cache: 'bun'
+
+      - name: Install Dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Run Integration Tests
+        run: bun test tests/integration --coverage --timeout=60000
+
+  test-performance:
+    name: Performance Tests - Memory, Speed & Resource Usage
+    runs-on: ubuntu-latest
+    needs: validate-headers
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Bun 1.3
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.0
+          cache: 'bun'
+
+      - name: Install Dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Run Performance Tests
+        run: bun test tests/performance --timeout=120000 --only-failures
+
+      - name: Upload Performance Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: performance-test-results
+          path: tests/reports/
+          retention-days: 7
+
+  test-matrix:
+    name: Matrix Tests - Tag-Based Dynamic Testing
+    runs-on: ubuntu-latest
+    needs: validate-headers
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Bun 1.3
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.0
+          cache: 'bun'
+
+      - name: Install Dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Download Index Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: tags-index
+          path: .citadel/indexes/
+
+      - name: Run Matrix Tests
+        run: bun test tests/matrix --pass-with-no-tests
 
   test-dashboard:
     name: Test Dashboard & AI Registry with Database Integration

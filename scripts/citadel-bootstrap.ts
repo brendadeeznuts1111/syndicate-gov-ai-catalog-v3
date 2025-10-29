@@ -25,16 +25,7 @@ try {
 // Anonymous telemetry (opt-out)
 if (process.env.DO_NOT_TRACK !== '1') {
   try {
-    const packageJson = await Bun.file('package.json').json();
-    fetch('https://telemetry.citadel.sh/install', {
-      method: 'POST',
-      body: JSON.stringify({
-        version: packageJson.version,
-        timestamp: Date.now(),
-        platform: process.platform
-      }),
-      headers: { 'Content-Type': 'application/json' }
-    }).catch(() => {}); // Fire and forget
+    await $`bun run telemetry`.quiet();
   } catch (error) {
     // Silently ignore telemetry failures
   }

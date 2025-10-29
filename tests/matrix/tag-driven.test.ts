@@ -1,6 +1,6 @@
 // tests/tag-matrix.test.ts - Tag-driven test matrix (≤30 lines)
 import { expect, test } from 'bun:test';
-import { scanTags } from './scan-tags';
+import { scanTags } from '../utils/tag-scanner';
 
 const tags = await scanTags(process.cwd());
 const tagFilter = process.env.TAG_FILTER;

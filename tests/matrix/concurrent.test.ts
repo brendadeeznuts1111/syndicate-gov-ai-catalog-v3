@@ -1,6 +1,6 @@
 // tests/concurrent-matrix.test.ts - Concurrent tag matrix (≤30 lines)
 import { describe, test, expect } from 'bun:test';
-import { scanTags } from './scan-tags';
+import { scanTags } from '../utils/tag-scanner';
 
 const tags = await scanTags(process.cwd());
 

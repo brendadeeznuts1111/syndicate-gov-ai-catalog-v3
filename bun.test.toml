@@ -1,9 +1,18 @@
 # bun.test.toml - Citadel Test Configuration (Latest Bun Best Practices)
 
 [test]
-# Test file patterns
-test_match = ["**/*.test.ts", "**/*.spec.ts"]
-test_ignore = ["**/node_modules/**", "**/dist/**"]
+# Organized test patterns by category
+test_match = [
+  "**/*.test.ts",
+  "**/*.spec.ts"
+]
+test_ignore = [
+  "**/node_modules/**",
+  "**/dist/**",
+  "**/coverage/**",
+  "**/test-reports/**",
+  "**/snapshots/__snapshots__/**"
+]
 
 # Coverage settings
 coverage = true
@@ -16,7 +25,7 @@ reporter = ["dots", "junit"]
 reporter_dir = "./test-reports"
 
 # Test environment
-preload = ["./tests/setup.ts"]
+preload = ["./tests/utils/global-setup.ts"]
 
 # Performance settings
 timeout = 30000
