@@ -1,10 +1,11 @@
-# 📦 Enterprise Dependency Management Guide
+# 📦 Enterprise Dependency Management - Official Bun Catalogs
 
-**Generated**: 2025-10-29T14:09:45.231Z  
+**Generated**: 2025-10-29T14:17:45.231Z  
 **Bun Version**: 1.3.1  
-**Workspaces**: 2 packages with recursive dependency tracking
+**Catalog Implementation**: Official Bun catalog patterns  
+**Dependencies**: 29 packages managed with catalog-driven consistency
 
-Complete guide to managing enterprise monorepo dependencies with Bun v1.3 using `--recursive` and `--filter` flags for comprehensive dependency tracking and updates.
+Complete guide to enterprise dependency management using official Bun catalog patterns for consistent version sharing, centralized updates, and streamlined monorepo maintenance.
 
 ---
 
@@ -33,6 +34,125 @@ bun outdated v1.3.0 (b0a6feca)
 │ @types/uuid (dev) │ 10.0.0  │ 10.0.0  │ 11.0.0 │ @syndicate/gov-rules │
 └───────────────────┴─────────┴─────────┴────────┴──────────────────────┘
 ```
+
+---
+
+## 🎯 **Official Catalog Implementation**
+
+### **📊 Current Catalog Configuration**
+
+Our monorepo implements official Bun catalog patterns for dependency management:
+
+```json
+{
+  "name": "syndicate-gov-monorepo",
+  "version": "1.0.1-beta.0",
+  "description": "Enhanced with catalog-driven monorepo support",
+  "workspaces": [
+    "packages/*"
+  ],
+  "catalog": {
+    "react": "^18.3.3",
+    "typescript": "^5.0.6",
+    "zod": "^3.24.3",
+    "uuid": "^10.0.2"
+  },
+  "catalogs": {
+    "testing": {
+      "jest": "29.6.2",
+      "react-testing-library": "14.0.0"
+    },
+    "build": {
+      "esbuild": "0.19.0"
+    }
+  }
+}
+```
+
+### **🔗 Workspace Catalog Usage**
+
+**Dashboard Workspace** (`packages/dashboard/package.json`):
+```json
+{
+  "name": "@syndicate/dashboard",
+  "version": "3.0.3",
+  "dependencies": {
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "tailwindcss": "4.1.16"
+  },
+  "devDependencies": {
+    "typescript": "catalog:",
+    "jest": "catalog:testing",
+    "react-testing-library": "catalog:testing"
+  }
+}
+```
+
+**Governance Workspace** (`packages/gov-rules/package.json`):
+```json
+{
+  "name": "@syndicate/gov-rules",
+  "version": "3.0.3",
+  "dependencies": {
+    "zod": "catalog:",
+    "uuid": "catalog:",
+    "express": "5.1.0"
+  },
+  "devDependencies": {
+    "typescript": "catalog:",
+    "jest": "catalog:testing"
+  }
+}
+```
+
+---
+
+## 🚀 **Catalog Benefits & Implementation**
+
+### **✅ Consistency Across Workspaces**
+
+**Single Source of Truth**:
+- All React dependencies use `catalog:` → `^18.3.3`
+- All TypeScript versions use `catalog:` → `^5.0.6`
+- All Zod validation uses `catalog:` → `^3.24.3`
+- All UUID generation uses `catalog:` → `^10.0.2`
+
+**Eliminated Version Drift**:
+```bash
+# Before catalogs (potential drift)
+packages/dashboard: "react": "^19.2.0"
+packages/gov-rules: "react": "^18.3.3"  # Inconsistent!
+
+# After catalogs (consistent)
+packages/dashboard: "react": "catalog:"
+packages/gov-rules: "react": "catalog:"  # Both use catalog version
+```
+
+### **🔄 Centralized Maintenance**
+
+**Update Once, Apply Everywhere**:
+```bash
+# Update React version in catalog
+# Edit root package.json: "react": "^19.2.0"
+
+# All workspaces automatically use new version
+bun install --filter @syndicate/dashboard
+bun install --filter @syndicate/gov-rules
+# Both workspaces now use React ^19.2.0
+```
+
+### **📋 Catalog Types & Usage**
+
+**🎯 Default Catalog (Singular)**:
+- Definition: Common dependencies used across most workspaces
+- Usage: Simple `catalog:` protocol
+- Example: `"react": "catalog:"` uses `^18.3.3` from default catalog
+
+**📊 Named Catalogs (Plural)**:
+- Definition: Specialized dependency groups for specific purposes
+- Usage: `catalog:<name>` protocol
+- Example: `"jest": "catalog:testing"` uses `29.6.2` from testing catalog
 
 ---
 
