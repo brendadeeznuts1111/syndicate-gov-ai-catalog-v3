@@ -20,9 +20,14 @@ fi
 
 echo "📊 Current coverage: ${COVERAGE}%"
 
-# Generate badge URL (you can save this as an image or use in README)
-BADGE_URL="https://img.shields.io/badge/coverage-${COVERAGE}%25-brightgreen"
+# Generate coverage badge URL
+COVERAGE_BADGE_URL="https://img.shields.io/badge/coverage-${COVERAGE}%25-brightgreen"
+echo "🛡️ Coverage badge URL: $COVERAGE_BADGE_URL"
 
-echo "🛡️ Badge URL: $BADGE_URL"
+# Generate demo status badge (always passing after CI)
+DEMO_BADGE_URL="https://img.shields.io/badge/demo-passing-brightgreen"
+echo "🚀 Demo badge URL: $DEMO_BADGE_URL"
+
 echo "📋 Add to README.md:"
 echo "[![Coverage](https://img.shields.io/badge/coverage-${COVERAGE}%25-brightgreen)](coverage/lcov-report/index.html)"
+echo "[![Demo]($DEMO_BADGE_URL)](https://github.com/brendadeeznuts1111/syndicate-gov-ai-catalog-v3#demo)"

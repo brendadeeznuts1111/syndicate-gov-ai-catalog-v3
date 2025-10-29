@@ -1,7 +1,7 @@
 {
-  "name": "syndicate-gov-monorepo",
-  "version": "1.0.1-beta.0",
-  "description": "Enhanced with catalog-driven monorepo support",
+  "name": "syndicate-gov-ai-catalog-v3",
+  "version": "1.14.0",
+  "description": "Bun-native AI Citadel with concurrent testing, deterministic coverage, and self-evolving APIs",
   "workspaces": [
     "packages/*"
   ],
@@ -99,6 +99,10 @@
     "🧪 bun:test:types": "bun test ./tests/types.test.ts",
     "🧪 bun:test:serial": "bun test ./tests/accounting-serial.test.ts",
     "📊 coverage:badge": "./scripts/coverage-badge.sh",
+    "🏰 citadel:bootstrap": "bun run scripts/citadel-bootstrap.ts",
+    "🚀 demo": "bun run scripts/demo.ts",
+    "preinstall": "bun install --frozen-lockfile 2>/dev/null || echo '⚠️  Lockfile check skipped (first install)'",
+    "postinstall": "bun run citadel:bootstrap",
     "ci": "bun run server.ts",
     "🔧 bun:preload": "BUN_INSPECT_PRELOAD=\"./scripts/preload/setup.ts\" bun run dev",
     "🗄️ bun:sql-preconnect": "DATABASE_URL=\"${DATABASE_URL}\" bun --sql-preconnect run dev",
