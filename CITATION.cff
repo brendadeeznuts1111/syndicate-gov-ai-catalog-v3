@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+title: "Bun-Native AI API Citadel"
+abstract: "Self-evolving OpenAPI system with concurrent testing, deterministic coverage, and flake-free CI."
+keywords:
+  - "bun"
+  - "openapi"
+  - "ai-generated-code"
+  - "concurrent-testing"
+  - "deterministic-benchmarking"
+authors:
+  - name: "Citadel Contributors"
+repository-code: "https://github.com/brendadeeznuts1111/syndicate-gov-ai-catalog-v3"
+license: MIT
