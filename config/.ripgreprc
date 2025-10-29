@@ -1,15 +1,121 @@
-# .ripgreprc - Syndicate GOV Ripgrep Configuration
+# .ripgreprc - Enterprise Syndicate GOV Ripgrep Configuration
+# Optimized for monorepo development, documentation workflow, and enterprise search
+
+# 🎯 File Type Definitions
 --type-add 'md:*.md'
 --type-add 'yaml:*.yaml'
 --type-add 'yml:*.yml'
+--type-add 'config:*.toml,*.ini,*.conf'
+--type-add 'scripts:*.sh,*.bat,*.ps1'
+--type-add 'docs:*.md,*.txt,*.rst'
+--type-add 'build:*.json,*.lock,*.tsbuildinfo'
+--type-add 'security:*.audit,*.security,*.policy'
+--type-add 'workspace:package.json,tsconfig.json,*.config.*'
+
+# 🔍 Search Behavior
 --smart-case
 --hidden
+--follow
+--max-columns 150
+--max-columns-preview
+--max-filesize 10M
+
+# 🚫 Exclusion Patterns - Monorepo Optimized
 -g '!node_modules/**'
 -g '!.git/**'
 -g '!dist/**'
+-g '!build/**'
+-g '!.next/**'
+-g '!.nuxt/**'
+-g '!.output/**'
+-g '!coverage/**'
+-g '!.coverage/**'
+-g '!.nyc_output/**'
+-g '!*.log'
+-g '!*.tmp'
+-g '!*.cache'
+-g '!.DS_Store'
+-g '!Thumbs.db'
+
+# 🏗️ Workspace-Specific Exclusions
+-g '!packages/*/node_modules/**'
+-g '!packages/*/dist/**'
+-g '!packages/*/build/**'
+-g '!packages/*/coverage/**'
 -g '!.citadel/indexes/.tags.index'
+-g '!.citadel/vault/.secrets.index'
+
+# 📚 Documentation-Specific Exclusions
+-g '!docs/archive/**'
+-g '!docs/.vuepress/dist/**'
+-g '!docs/.vitepress/dist/**'
+-g '!docs/_site/**'
+-g '!docs/.docusaurus/**'
+
+# 🔒 Security & Privacy Exclusions
+-g '!**/.env*'
+-g '!**/.secret*'
+-g '!**/.private*'
+-g '!**/secrets/**'
+-g '!**/credentials/**'
+-g '!**/.aws/**'
+-g '!**/.azure/**'
+
+# 🎨 Color Scheme - Enterprise Theme
 --colors match:fg:green
+--colors match:bg:default
 --colors line:fg:yellow
+--colors line:bg:default
 --colors path:fg:blue
---max-columns 150
---max-columns-preview
+--colors path:bg:default
+--colors match:style:bold
+--colors line:style:dim
+--colors path:style:underline
+
+# 📊 Context & Formatting
+--context 2
+--heading
+--line-number
+--separator
+--pretty
+
+# 🔧 Performance Optimizations
+--threads 0
+--mmap
+--no-ignore-vcs
+
+# 📋 Search Priorities (for documentation workflow)
+--type-add 'guide:docs/**/*.md'
+--type-add 'package:packages/**/package.json'
+--type-add 'config:config/**/*'
+--type-add 'script:scripts/**/*'
+--type-add 'tool:tools/**/*'
+--type-add 'test:tests/**/*'
+--type-add 'rule:rules/**/*'
+
+# 🎯 Enterprise Search Patterns
+# Quick search commands:
+# rg --type guide 'workspace'     # Search documentation
+# rg --type package 'catalog'     # Search package.json files
+# rg --type config 'bun'          # Search configuration files
+# rg --type script 'build'        # Search build scripts
+# rg --type security 'audit'      # Search security files
+# rg --type workspace 'filter'    # Search workspace configs
+
+# 🚀 Performance Monitoring
+# Use --stats for search performance analysis
+# Example: rg --stats --type guide 'workspace'
+
+# 🔍 Debug & Analysis Mode
+# Uncomment for detailed search analysis:
+# --debug
+# --stats
+# --time
+
+# 📝 Custom Search Aliases (use with shell functions)
+# Common patterns for enterprise development:
+# - Search all documentation: rg --type guide
+# - Search package configurations: rg --type package
+# - Search security configurations: rg --type security
+# - Search build configurations: rg --type config
+# - Search test files: rg --type test

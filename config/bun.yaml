@@ -1,20 +1,59 @@
-# bun.yaml - Syndicate GOV Config
+# bun.yaml - Enhanced with Database Integration & Enterprise Features
+# [BUN][CONFIG][YAML][BUN-CONFIG-001][v3.0][LIVE]
+# Grepable: [bun-config-yaml-bun-config-001-v3-0-live]
+
+# Core Catalog Configuration
 catalog:
   react: "18.3.1"
   typescript: "5.0.4"
   zod: "3.24.1"
   uuid: "10.0.0"
+  
+  # Database Integration
+  database:
+    bunsql: "1.0.0"
+    postgres: "3.4.3"
+    redis: "4.6.10"
+    sqlite: "3.44.0"
+    
+# Testing Catalog
 catalogs:
   testing:
     jest: 29.6.2
     react-testing-library: 14.0.0
+    @testing-library/jest-dom: 6.1.4
+    
   build:
     esbuild: 0.19.0
+    @esbuild-plugins/node-modules-polyfill: 0.2.2
+    
+  database:
+    @types/pg: 8.10.7
+    @types/redis: 4.0.11
+    
+# Workspace Configuration
 workspaces:
   packages:
     - "packages/*"
+    - "tools/*"
+    
+# Registry Configuration
 registry:
-  path: ~/.syndicate/registry
+  path: "${REGISTRY_PATH:~/.syndicate/registry}"
+  
+  # Database-Backed Registry
+  database:
+    enabled: true
+    backend: "postgres"
+    cache: "redis"
+    local: "sqlite"
+    
+    # Index Configuration
+    indexes:
+      tags: "./.citadel/indexes/.tags.index"
+      packages: "./.citadel/indexes/.packages.index"
+      rules: "./.citadel/indexes/.rules.index"
+      
 # Enhanced Authentication & Security Configuration
 security:
   scanner: "@socketsecurity/bun-security-scanner"
@@ -44,10 +83,10 @@ security:
     enabled: true
     clientId: "${GOOGLE_CLIENT_ID}"
     clientSecret: "${GOOGLE_CLIENT_SECRET}"
-    redirectUri: "${GOOGLE_REDIRECT_URI:http://localhost:3000/auth/google/callback}"
+    redirectUri: "${GOOGLE_REDIRECT_URI:http://${HOST:localhost}:${PORT:3000}/auth/google/callback}"
     scope: ["openid", "profile", "email"]
     
-  # Session Management
+  # Session Management with Database
   session:
     enabled: true
     store: "redis"  # redis, memory, database
@@ -56,6 +95,11 @@ security:
     rolling: true
     saveUninitialized: false
     
+    # Database Session Storage
+    database:
+      table: "sessions"
+      cleanupInterval: 3600000  # 1 hour
+      
   # Multi-Provider Authentication
   providers:
     jwt:
@@ -83,9 +127,9 @@ security:
   # CORS Configuration for Auth Endpoints
   cors:
     enabled: true
-    origins: 
-      - "${FRONTEND_URL:http://localhost:3000}"
-      - "${DASHBOARD_URL:http://localhost:3001}"
+    origins:
+      - "${FRONTEND_URL:http://${HOST:localhost}:${PORT:3000}}"
+      - "${DASHBOARD_URL:http://${HOST:localhost}:${DASHBOARD_PORT:3001}}"
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
     allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"]
     credentials: true
@@ -99,6 +143,7 @@ security:
         hosts:
           - "${API_HOST:localhost}"
           - "${REDIS_HOST:localhost}"
+          - "${POSTGRES_HOST:localhost}"
           - "accounts.google.com"
           - "oauth2.googleapis.com"
           - "www.googleapis.com"
@@ -121,8 +166,9 @@ security:
     preconnect:
       enabled: true
       hosts:
-        - "${API_URL:http://localhost:8080}"
-        - "${REDIS_HOST:localhost}:6379"
+        - "${API_URL:http://${HOST:localhost}:${API_PORT:8080}}"
+        - "${REDIS_HOST:localhost}:${REDIS_PORT:6379}"
+        - "${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}"
         - "https://accounts.google.com"
         - "https://oauth2.googleapis.com"
       startup: true
@@ -158,7 +204,7 @@ security:
         retries: 3
         retryDelay: 1000
 
-# Bun Runtime Configuration
+# Bun Runtime Configuration with Database Integration
 bun:
   # Default CLI Arguments
   options:
@@ -169,22 +215,23 @@ bun:
     # Testing defaults
     testing: "--coverage --reporter=verbose"
     
-  # Custom User-Agent
+  # Custom User-Agent with Database Info
   userAgent:
-    default: "Citadel/${APP_VERSION:3.0.0} (Bun-${BUN_VERSION:1.3.0})"
-    fetch: "Citadel-Fetch/${APP_VERSION:3.0.0}"
-    auth: "Citadel-Auth/${APP_VERSION:3.0.0}"
+    default: "Citadel/${APP_VERSION:3.0.0} (Bun-${BUN_VERSION:1.3.0}) Database-Enabled"
+    fetch: "Citadel-Fetch/${APP_VERSION:3.0.0} (PostgreSQL-Redis-SQLite)"
+    auth: "Citadel-Auth/${APP_VERSION:3.0.0} (Secure-Session)"
     
-  # Preload Scripts
+  # Preload Scripts with Database Setup
   preload:
     enabled: true
     scripts:
       - "./scripts/preload/setup.ts"
       - "./scripts/preload/database.ts"
       - "./scripts/preload/auth.ts"
+      - "./scripts/preload/bunsql.ts"
     environment: "BUN_INSPECT_PRELOAD"
     
-  # SQL Optimization
+  # SQL Optimization with Bun.SQL
   sql:
     # PostgreSQL preconnect at startup
     preconnect:
@@ -192,11 +239,22 @@ bun:
       databaseUrl: "${DATABASE_URL}"
       flag: "--sql-preconnect"
       
-    # Connection pooling
+    # Connection Pooling
     pool:
       min: 2
-      max: 10
+      max: 20
       idleTimeout: 30000
+      
+    # Query Optimization
+    optimization:
+      preparedStatements: true
+      queryCache: true
+      indexHints: true
+      
+    # Database Health Checks
+    healthCheck:
+      enabled: true
+      interval: 30000  # 30 seconds
       
   # Standalone Executable Control
   standalone:
@@ -210,19 +268,27 @@ bun:
   performance:
     # Memory management
     memory:
-      maxHeap: "2GB"
+      maxHeap: "4GB"
       gcThreshold: 0.8
       
     # Threading
     threads:
-      max: "${BUN_MAX_THREADS:4}"
+      max: "${BUN_MAX_THREADS:8}"
       workerPool: true
       
     # Compilation cache
     cache:
       enabled: true
       directory: "./.bun/cache"
-      maxSize: "500MB"
+      maxSize: "1GB"
+      
+    # Database Performance
+    database:
+      queryTimeout: 30000
+      connectionTimeout: 10000
+      slowQueryThreshold: 1000
+
+# Rules Configuration with Database Integration
 rules:
   header:
     schema:
@@ -269,7 +335,7 @@ rules:
     grep:
       patterns:
         all-tags: '\[[a-z0-9.-]+\]'
-        by-scope: '\[GOV\-[A-Z]+\-[A-Z+\-'
+        by-scope: '\[GOV\-[A-Z]+\-[A-Z0-9\-]+\]'
         required-only: '\[.*REQUIRED\]'
       flags:
         - '--type-add'
@@ -302,3 +368,140 @@ rules:
     hooks:
       - parse-headers: true
       - grep-index: true
+      - database-sync: true
+      
+    # Database Validation
+    database:
+      enabled: true
+      schemaValidation: true
+      integrityCheck: true
+      
+# Database Configuration
+database:
+  # PostgreSQL Configuration
+  postgres:
+    enabled: true
+    url: "${DATABASE_URL:postgresql://localhost:5432/citadel}"
+    host: "${POSTGRES_HOST:localhost}"
+    port: "${POSTGRES_PORT:5432}"
+    database: "${POSTGRES_DATABASE:citadel}"
+    username: "${POSTGRES_USER:citadel}"
+    password: "${POSTGRES_PASSWORD}"
+    
+    # Connection Pooling
+    pool:
+      min: 2
+      max: 20
+      idleTimeout: 30000
+      
+  # Redis Configuration
+  redis:
+    enabled: true
+    url: "${REDIS_URL:redis://localhost:6379}"
+    host: "${REDIS_HOST:localhost}"
+    port: "${REDIS_PORT:6379}"
+    password: "${REDIS_PASSWORD:}"
+    database: "${REDIS_DB:0}"
+    
+    # Connection Pooling
+    pool:
+      min: 1
+      max: 10
+      timeout: 5000
+      
+  # SQLite Configuration
+  sqlite:
+    enabled: true
+    path: "${SQLITE_PATH:./.citadel/citadel.db}"
+    pool:
+      min: 1
+      max: 5
+      
+# AI Configuration
+ai:
+  enabled: true
+  
+  # AI Models
+  models:
+    header:
+      enabled: true
+      provider: "tensorflow"
+      model: "wasm-tensorflow-lite-v3.0"
+      accuracy: 0.978
+      
+    yaml:
+      enabled: true
+      provider: "openai"
+      model: "gpt-4"
+      maxTokens: 2000
+      
+  # AI Operations
+  operations:
+    generation:
+      enabled: true
+      cache: true
+      timeout: 10000
+      
+    validation:
+      enabled: true
+      strict: true
+      timeout: 5000
+
+# Monitoring Configuration
+monitoring:
+  enabled: true
+  
+  # Metrics Collection
+  metrics:
+    enabled: true
+    interval: 5000  # 5 seconds
+    
+    # Database Metrics
+    database:
+      enabled: true
+      metrics:
+        - "connection_pool_usage"
+        - "query_time"
+        - "cache_hit_rate"
+        
+  # Health Checks
+  health:
+    enabled: true
+    endpoint: "/health"
+    checks:
+      - "database"
+      - "redis"
+      - "ai"
+      - "registry"
+
+# Environment Variables
+environment:
+  # Required Variables
+  required:
+    - "DATABASE_URL"
+    - "REDIS_URL"
+    - "JWT_SECRET"
+    - "SESSION_SECRET"
+    
+  # Optional Variables
+  optional:
+    - "POSTGRES_HOST"
+    - "POSTGRES_PORT"
+    - "POSTGRES_DATABASE"
+    - "POSTGRES_USER"
+    - "POSTGRES_PASSWORD"
+    - "REDIS_HOST"
+    - "REDIS_PORT"
+    - "REDIS_PASSWORD"
+    - "REDIS_DB"
+    - "SQLITE_PATH"
+    - "REGISTRY_PATH"
+    - "GOOGLE_CLIENT_ID"
+    - "GOOGLE_CLIENT_SECRET"
+    - "COOKIE_SECURE"
+    - "COOKIE_DOMAIN"
+    - "FRONTEND_URL"
+    - "DASHBOARD_URL"
+    - "API_URL"
+    - "BUN_MAX_THREADS"
+    - "FETCH_VERBOSE"

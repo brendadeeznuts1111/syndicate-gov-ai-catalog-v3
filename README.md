@@ -31,6 +31,7 @@
 - [📊 Configuration](#-configuration)
 - [🧪 Testing](#-testing)
 - [📚 Documentation](#-documentation)
+- [🖥️ Interactive API Docs](#-interactive-api-documentation)
 - [🏆 Achievements](#-achievements)
 - [🚀 Production Deployment](#-production-deployment)
 - [🤝 Contributing](#-contributing)
@@ -822,6 +823,13 @@ Error Recovery: 94% auto-recovery rate
 
 ### **📚 Archive** - [`docs/archive/`](docs/archive/)
 - **📚 Historical Documentation** - [`docs/archive/README.md`](docs/archive/README.md) - Archived content
+
+### **🖥️ Interactive API Documentation** - [`docs/11-interactive-api-docs/`](docs/11-interactive-api-docs/)
+- **🖥️ Interactive API Docs** - [`docs/11-interactive-api-docs/README.md`](docs/11-interactive-api-docs/README.md) - Deep system insights and interactive testing
+- **🔍 System Deep Dives** - [`docs/11-interactive-api-docs/deep-dives/`](docs/11-interactive-api-docs/deep-dives/) - Complete architecture breakdowns
+- **�� Live Monitoring** - [`docs/11-interactive-api-docs/monitoring/`](docs/11-interactive-api-docs/monitoring/) - Real-time metrics and WebSocket streams
+- **🧪 Interactive Testing** - [`docs/11-interactive-api-docs/testing/`](docs/11-interactive-api-docs/testing/) - API playground and testing suites
+- **🔧 Developer Tools** - [`docs/11-interactive-api-docs/tools/`](docs/11-interactive-api-docs/tools/) - SDK generators and configuration builders
 
 ## 🏆 **FINAL COMMAND REFERENCE CERTIFICATION**
 

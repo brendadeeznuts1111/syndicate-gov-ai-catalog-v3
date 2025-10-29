@@ -49,7 +49,8 @@
   },
   "dependencies": {
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "tailwindcss": "4.1.16"
   },
   "devDependencies": {
     "@types/react": "^19.2.0",
@@ -143,7 +144,7 @@
     "performance": {
       "target_load_time": "100ms",
       "target_render_time": "50ms",
-      "concurrent_users": 10000
+      "concurrent_users": 1e4
     },
     "compliance": [
       "SOC2",

@@ -7,7 +7,7 @@ app:
   react:
     catalog:
       enabled: true
-      endpoint: "http://localhost:3001/api/catalog"
+      endpoint: "http://${HOST:localhost}:${DASHBOARD_PORT:3001}/api/catalog"
       cache:
         ttl: 300000  # 5 minutes
         maxSize: 1000
@@ -43,11 +43,11 @@ server:
   
   cors:
     enabled: true
-    origins: ["http://localhost:3000", "http://localhost:3001"]
+    origins: ["http://${HOST:localhost}:${PORT:3000}", "http://${HOST:localhost}:${DASHBOARD_PORT:3001}"]
   
   websocket:
     enabled: true
-    port: 3001
+    port: ${DASHBOARD_PORT:3001}
     heartbeat: 30000
     
   security:

@@ -66,7 +66,7 @@ google:
   enabled: true
   clientId: "${GOOGLE_CLIENT_ID}"
   clientSecret: "${GOOGLE_CLIENT_SECRET}"
-  redirectUri: "${GOOGLE_REDIRECT_URI:http://localhost:3000/auth/google/callback}"
+  redirectUri: "${GOOGLE_REDIRECT_URI:http://${HOST:localhost}:${PORT:3000}/auth/google/callback}"
   
   # OAuth2 Scopes
   scope:
@@ -177,9 +177,9 @@ cors:
   
   # Allowed Origins
   origins: 
-    - "${FRONTEND_URL:http://localhost:3000}"
-    - "${DASHBOARD_URL:http://localhost:3001}"
-    - "${API_URL:http://localhost:8080}"
+    - "${FRONTEND_URL:http://${HOST:localhost}:${PORT:3000}}"
+    - "${DASHBOARD_URL:http://${HOST:localhost}:${DASHBOARD_PORT:3001}}"
+    - "${API_URL:http://${HOST:localhost}:${API_PORT:8080}}"
     
   # HTTP Methods
   methods: 
