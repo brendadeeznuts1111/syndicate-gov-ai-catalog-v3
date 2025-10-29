@@ -65,20 +65,33 @@ The `.routes.index` file contains a list of all API route handlers that export `
 
 ### **Current Routes**
 ```
-routes/config/store.ts          # Configuration storage API
-routes/ws/config-broadcast.ts   # WebSocket configuration broadcasting
-routes/config/validate.ts       # Configuration validation API
-routes/config/get-by-hash.ts    # Configuration retrieval by hash
+# AI-Generated Routes (5 suggestions):
+routes/ai/suggestion-0.ts    # /api/v1/users/audit (97.3% confidence)
+routes/ai/suggestion-1.ts    # /api/v1/analytics/export (95.8% confidence)
+routes/ai/suggestion-2.ts    # /api/v1/dashboard/metrics (94.2% confidence)
+routes/ai/suggestion-3.ts    # /api/v1/config/toggle (93.7% confidence)
+routes/ai/suggestion-4.ts    # /api/v1/reports/generate (92.1% confidence)
+
+# Core Configuration Routes:
+routes/config/store.ts       # Configuration storage API
+routes/ws/config-broadcast.ts # WebSocket configuration broadcasting
+routes/config/validate.ts    # Configuration validation API
+routes/config/get-by-hash.ts # Configuration retrieval by hash
 ```
 
 ### **Route Categories**
 
-| Route | Method | Purpose | Handler |
-|-------|--------|---------|---------|
-| `/api/config` | POST | Store configuration | `routes/config/store.ts` |
-| `/ws/config` | WS | Broadcast config changes | `routes/ws/config-broadcast.ts` |
-| `/api/config/validate` | POST | Validate configuration | `routes/config/validate.ts` |
-| `/api/config/:hash` | GET | Get config by hash | `routes/config/get-by-hash.ts` |
+| Route | Method | Purpose | Handler | Type |
+|-------|--------|---------|---------|------|
+| `/api/v1/users/audit` | GET | User audit endpoint | `routes/ai/suggestion-0.ts` | AI-Generated |
+| `/api/v1/analytics/export` | GET | Analytics data export | `routes/ai/suggestion-1.ts` | AI-Generated |
+| `/api/v1/dashboard/metrics` | GET | Dashboard metrics API | `routes/ai/suggestion-2.ts` | AI-Generated |
+| `/api/v1/config/toggle` | POST | Configuration toggle | `routes/ai/suggestion-3.ts` | AI-Generated |
+| `/api/v1/reports/generate` | POST | Report generation | `routes/ai/suggestion-4.ts` | AI-Generated |
+| `/api/config` | POST | Store configuration | `routes/config/store.ts` | Core |
+| `/ws/config` | WS | Broadcast config changes | `routes/ws/config-broadcast.ts` | Core |
+| `/api/config/validate` | POST | Validate configuration | `routes/config/validate.ts` | Core |
+| `/api/config/:hash` | GET | Get config by hash | `routes/config/get-by-hash.ts` | Core |
 
 ### **Regenerating Routes Index**
 ```bash
@@ -88,6 +101,33 @@ bun run api:index
 # Manual regeneration
 rg --files-with-matches 'export const handle' routes/ > .routes.index
 ```
+
+### **AI Route Suggestion Generation**
+```bash
+# Generate AI-suggested routes from usage patterns
+bun run scripts/ai-suggest.ts
+
+# Dry-run mode (no file changes)
+AI_HANDLER_WRITE=false bun run scripts/ai-suggest.ts
+
+# Generate OpenAPI schemas with AI routes
+bun run scripts/gen-openapi-schemas.ts
+```
+
+**AI Suggestion Process:**
+1. **Log Analysis** - Analyzes usage logs for patterns
+2. **Vector Embedding** - Creates 384-dim embeddings using sentence-transformers
+3. **Confidence Scoring** - Rates suggestions by confidence (90%+ threshold)
+4. **Schema Generation** - Auto-generates Zod schemas and TypeScript handlers
+5. **OpenAPI Integration** - Updates OpenAPI spec with AI-generated schemas
+
+**AI-Generated Features:**
+- ✅ **Type-safe schemas** with Zod validation
+- ✅ **UUID-based resource IDs** for enterprise compatibility
+- ✅ **Confidence scoring** for transparency
+- ✅ **AI metadata headers** in responses
+- ✅ **Backup files** for safe regeneration
+- ✅ **OpenAPI integration** for automatic documentation
 
 ---
 

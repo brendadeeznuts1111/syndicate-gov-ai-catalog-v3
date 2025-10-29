@@ -204,7 +204,7 @@ class AISchemaGenerator {
     const aiSchemas = await this.generateSchemasFromHandlers();
     
     // Load existing OpenAPI spec
-    const openapiPath = './docs/openapi.yaml';
+    const openapiPath = './docs/08-api-reference/openapi.yaml';
     const openapiContent = await file(openapiPath).text();
     const openapi = YAML.parse(openapiContent);
     
