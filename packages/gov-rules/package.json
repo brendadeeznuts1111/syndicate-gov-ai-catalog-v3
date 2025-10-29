@@ -55,8 +55,10 @@
     "compliance:verify": "bun run src/scripts/compliance-verify.ts"
   },
   "dependencies": {
-    "zod": "^4.1.12",
-    "uuid": "^13.0.0"
+    "express": "5.1.0",
+    "react": "19.2.0",
+    "uuid": "^13.0.0",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "typescript": "^5.0.4",
@@ -151,7 +153,7 @@
     "performance": {
       "target_validation_time": "50ms",
       "target_compliance_check": "100ms",
-      "concurrent_rules": 100000
+      "concurrent_rules": 1e5
     },
     "compliance": [
       "SOC2",
