@@ -282,6 +282,7 @@ bun run scripts/test-analytics.ts
 - **[📋 Reference Documentation](docs/01-getting-started/REFERENCE.md)** - All variables, constants, and interfaces
 - **[🧪 Testing Suite](tests/README.md)** - Complete testing infrastructure and guide
 - **[🧪 Tests Index](tests/INDEX.md)** - Quick navigation for test categories
+- **[📊 Logs & Routes](docs/06-deployment/LOGS-AND-ROUTES.md)** - Runtime logging and API routing
 - **[🧪 Testing Guide](docs/07-validation/TESTING.md)** - Advanced testing techniques
 - **[🔐 Security Documentation](docs/03-quantum-security/README.md)** - Security best practices
 
