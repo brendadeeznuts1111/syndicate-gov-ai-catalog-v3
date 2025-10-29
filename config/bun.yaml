@@ -90,14 +90,73 @@ security:
     allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"]
     credentials: true
     
-  # Rate Limiting
-  rateLimit:
-    enabled: true
-    windowMs: 900000  # 15 minutes
-    max: 100  # limit each IP to 100 requests per windowMs
-    message: "Too many authentication attempts, please try again later"
-    standardHeaders: true
-    legacyHeaders: false
+  # Performance & Network Optimization
+  network:
+    # DNS Prefetching
+    dns:
+      prefetch:
+        enabled: true
+        hosts:
+          - "${API_HOST:localhost}"
+          - "${REDIS_HOST:localhost}"
+          - "accounts.google.com"
+          - "oauth2.googleapis.com"
+          - "www.googleapis.com"
+        ttl: 30000  # 30 seconds
+        
+      # DNS Caching
+      cache:
+        enabled: true
+        ttl: 30000  # 30 seconds
+        maxSize: 1000
+        
+    # Connection Pooling & Keep-Alive
+    connections:
+      keepAlive: true
+      maxSimultaneous: "${BUN_CONFIG_MAX_HTTP_REQUESTS:256}"
+      timeout: 30000
+      reuse: true
+      
+    # Preconnect Configuration
+    preconnect:
+      enabled: true
+      hosts:
+        - "${API_URL:http://localhost:8080}"
+        - "${REDIS_HOST:localhost}:6379"
+        - "https://accounts.google.com"
+        - "https://oauth2.googleapis.com"
+      startup: true
+      
+    # Response Buffering
+    buffering:
+      enabled: true
+      maxResponseSize: "10MB"
+      compression: true
+      compressionTypes: ["text/*", "application/json", "application/xml"]
+      
+    # Fetch Optimization
+    fetch:
+      # Data URL Support
+      dataUrls:
+        enabled: true
+        maxSize: "1MB"
+        allowedTypes: ["text/plain", "application/json", "image/*"]
+        
+      # Blob URL Support
+      blobUrls:
+        enabled: true
+        maxSize: "5MB"
+        cleanupInterval: 300000  # 5 minutes
+        
+      # Debugging
+      verbose: "${FETCH_VERBOSE:false}"
+      
+      # Error Handling
+      errorHandling:
+        rejectUnauthorized: true
+        timeout: 30000
+        retries: 3
+        retryDelay: 1000
 
 # Enhanced HEADER Logic Configuration
 rules:

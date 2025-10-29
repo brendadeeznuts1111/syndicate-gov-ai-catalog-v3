@@ -60,6 +60,17 @@
     "💡 innovation:submit": "bun run scripts/innovation-submit.ts --idea $1 --category $2",
     "🔬 innovation:lab": "bun run scripts/innovation-lab.ts --access --collaborate",
 
+    "// ===== NETWORK OPTIMIZATION ===== //": "",
+    "🌐 network:optimize": "bun run scripts/network-optimizer.ts optimize-all",
+    "🔄 network:prefetch": "bun run scripts/network-optimizer.ts prefetch",
+    "🔗 network:preconnect": "bun run scripts/network-optimizer.ts preconnect",
+    "📊 network:stats": "bun run scripts/network-optimizer.ts stats",
+    "📄 network:data-url": "bun run scripts/network-optimizer.ts data-url",
+    "🔵 network:blob-url": "bun run scripts/network-optimizer.ts blob-url",
+    "🌐 network:fetch": "bun run scripts/network-optimizer.ts fetch",
+    "🏃 network:benchmark": "bun run scripts/network-optimizer.ts benchmark",
+    "⚡ network:performance": "bun run scripts/network-optimizer.ts benchmark http://localhost:8080 20",
+
     "// ===== AUTHENTICATION & SECURITY ===== //": "",
     "🔐 auth:setup": "bun run scripts/auth-setup.ts setup",
     "🔑 auth:validate": "bun run scripts/auth-setup.ts validate",
