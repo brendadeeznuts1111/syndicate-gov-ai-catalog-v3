@@ -7,6 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v1
+      - run: bun install
+      - run: bun run ci
+      - run: ./scripts/citadel-bootstrap.sh
       - run: echo "Bump Citadel to ${{ github.ref_name }}" > body.txt
       - uses: peter-evans/create-pull-request@v6
         with:
