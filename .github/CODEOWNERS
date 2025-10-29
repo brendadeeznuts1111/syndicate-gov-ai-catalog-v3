@@ -1,142 +1,61 @@
-# CODEOWNERS - Enterprise Supreme v3.0
+# CODEOWNERS - Syndicate GOV AI Catalog v3.0
 # This file defines who owns and reviews specific parts of the codebase
-# Enhanced with AI, Quantum, Analytics, and Enterprise team structures
+# Updated for real repository structure with individual maintainers
 # For more information, see: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
 # ===== GLOBAL OWNERSHIP =====
-# Global owners - approve all changes across the entire repository
-* @syndicate-gov/maintainers @syndicate-gov/enterprise-council
-
-# ===== CORE CITADEL SYSTEM =====
-# Core Citadel system - fundamental platform components
-/src/citadel/ @syndicate-gov/core-team @syndicate-gov/enterprise-architects
-/src/citadel/cli/ @syndicate-gov/cli-team @syndicate-gov/ux-team
-/src/citadel/core/ @syndicate-gov/core-team @syndicate-gov/performance-team
-/src/citadel/governance/ @syndicate-gov/security-team @syndicate-gov/compliance-team
-/src/citadel/performance/ @syndicate-gov/performance-team @syndicate-gov/optimization-team
-/src/citadel/registry/ @syndicate-gov/registry-team @syndicate-gov/data-team
-/src/citadel/integrator/ @syndicate-gov/integration-team @syndicate-gov/api-team
-
-# ===== AI & INTELLIGENCE SYSTEMS =====
-# AI-powered components and machine learning systems
-/src/ai/ @syndicate-gov/ai-team @syndicate-gov/ml-engineers
-/src/ai/models/ @syndicate-gov/ml-team @syndicate-gov/data-scientists
-/src/ai/predictive/ @syndicate-gov/analytics-team @syndicate-gov/ai-team
-/src/ai/classification/ @syndicate-gov/ml-team @syndicate-gov/ai-team
-/src/ai/optimization/ @syndicate-gov/ai-team @syndicate-gov/performance-team
-
-# ===== VALIDATION & GOVERNANCE =====
-# Header validation, governance rules, and compliance systems
-/src/validation/ @syndicate-gov/validation-team @syndicate-gov/governance-team
-/docs/validation/ @syndicate-gov/docs-team @syndicate-gov/compliance-team
-/rules/ @syndicate-gov/governance-team @syndicate-gov/security-team
-/rules/gov-* @syndicate-gov/governance-team @syndicate-gov/maintainers
-
-# ===== SECURITY & QUANTUM SYSTEMS =====
-# Security, quantum-safe cryptography, and blockchain components
-/src/security/ @syndicate-gov/security-team @syndicate-gov/quantum-team
-/src/quantum/ @syndicate-gov/quantum-team @syndicate-gov/security-team
-/src/blockchain/ @syndicate-gov/blockchain-team @syndicate-gov/security-team
-/src/compliance/ @syndicate-gov/compliance-team @syndicate-gov/security-team
-
-# ===== ENTERPRISE & SCALABILITY =====
-# Enterprise features, scaling, and monitoring systems
-/src/enterprise/ @syndicate-gov/enterprise-team @syndicate-gov/scalability-team
-/src/scalability/ @syndicate-gov/scalability-team @syndicate-gov/infrastructure-team
-/src/monitoring/ @syndicate-gov/monitoring-team @syndicate-gov/devops-team
-/src/automation/ @syndicate-gov/automation-team @syndicate-gov/devops-team
-
-# ===== ANALYTICS & BUSINESS INTELLIGENCE =====
-# Analytics, dashboards, and business intelligence systems
-/src/analytics/ @syndicate-gov/analytics-team @syndicate-gov/data-team
-/src/dashboard/ @syndicate-gov/dashboard-team @syndicate-gov/ux-team
-/src/business-intelligence/ @syndicate-gov/bi-team @syndicate-gov/analytics-team
-
-# ===== PERFORMANCE & INFRASTRUCTURE =====
-# Performance optimization, parallel processing, and CI/CD
-/src/performance/ @syndicate-gov/performance-team @syndicate-gov/optimization-team
-/src/infrastructure/ @syndicate-gov/infrastructure-team @syndicate-gov/devops-team
-/src/ci-cd/ @syndicate-gov/ci-cd-team @syndicate-gov/devops-team
-
-# ===== USER EXPERIENCE & INTERFACES =====
-# UX components, wizards, and visual systems
-/src/ux/ @syndicate-gov/ux-team @syndicate-gov/design-team
-/src/wizards/ @syndicate-gov/ux-team @syndicate-gov/ai-team
-/src/visual/ @syndicate-gov/design-team @syndicate-gov/ux-team
-
-# ===== SCRIPTS & TOOLING =====
-# Enhanced scripts, rituals, and development tools
-/scripts/ @syndicate-gov/devops-team @syndicate-gov/automation-team
-/scripts/enhanced-repo-rituals.ts @syndicate-gov/rituals-team @syndicate-gov/ai-team
-/tools/ @syndicate-gov/tools-team @syndicate-gov/devops-team
-/tools/alias-system/ @syndicate-gov/tools-team @syndicate-gov/cli-team
-
-# ===== CONFIGURATION & SETTINGS =====
-# Configuration files, dashboards, and system settings
-/config/ @syndicate-gov/devops-team @syndicate-gov/enterprise-architects
-/config/dashboard-config.yaml @syndicate-gov/dashboard-team @syndicate-gov/config-team
-
-# ===== GITHUB & WORKFLOW MANAGEMENT =====
-# GitHub workflows, labels, templates, and automation
-/.github/ @syndicate-gov/maintainers @syndicate-gov/devops-team
-/.github/workflows/ @syndicate-gov/devops-team @syndicate-gov/ci-cd-team
-/.github/labels.yml @syndicate-gov/maintainers @syndicate-gov/governance-team
-/.github/labels.json @syndicate-gov/maintainers @syndicate-gov/governance-team
-/.github/PULL_REQUEST_TEMPLATE/ @syndicate-gov/maintainers @syndicate-gov/docs-team
-/.github/ISSUE_TEMPLATE/ @syndicate-gov/maintainers @syndicate-gov/docs-team
-
-# ===== DOCUMENTATION & KNOWLEDGE =====
-# Documentation, deployment guides, and implementation notes
-/docs/ @syndicate-gov/docs-team @syndicate-gov/knowledge-team
-/docs/deployment/ @syndicate-gov/docs-team @syndicate-gov/devops-team
-/docs/implementation/ @syndicate-gov/docs-team @syndicate-gov/core-team
-/docs/validation/ @syndicate-gov/docs-team @syndicate-gov/validation-team
-README.md @syndicate-gov/docs-team @syndicate-gov/maintainers
-
-# ===== EXAMPLES & DEMONSTRATIONS =====
-# Examples, demos, and educational content
-/examples/ @syndicate-gov/examples-team @syndicate-gov/education-team
-/examples/demos/ @syndicate-gov/demos-team @syndicate-gov/docs-team
-/examples/headers/ @syndicate-gov/examples-team @syndicate-gov/governance-team
-/examples/templates/ @syndicate-gov/examples-team @syndicate-gov/ai-team
+# Repository owner - approves all changes
+* @brendadeeznuts1111
 
 # ===== TESTING & QUALITY ASSURANCE =====
-# Tests, validation, and quality assurance
-/tests/ @syndicate-gov/qa-team @syndicate-gov/validation-team
-/tests/integration/ @syndicate-gov/qa-team @syndicate-gov/integration-team
-/tests/performance/ @syndicate-gov/qa-team @syndicate-gov/performance-team
-/tests/security/ @syndicate-gov/qa-team @syndicate-gov/security-team
+# Test files and quality assurance
+/tests/ @brendadeeznuts1111
+/tests/*.test.ts @brendadeeznuts1111
+/tests/tag-matrix.test.ts @brendadeeznuts1111
+/tests/scan-tags.ts @brendadeeznuts1111
+/tests/timeout-from-header.test.ts @brendadeeznuts1111
+/tests/mutation-allow.test.ts @brendadeeznuts1111
 
-# ===== PACKAGE MANAGEMENT =====
-# Package management, dependencies, and modules
-/packages/ @syndicate-gov/packages-team @syndicate-gov/dependency-team
-/packages/dashboard/ @syndicate-gov/packages-team @syndicate-gov/dashboard-team
-/packages/gov-rules/ @syndicate-gov/packages-team @syndicate-gov/governance-team
-package.json @syndicate-gov/packages-team @syndicate-gov/maintainers
+# ===== GITHUB & CI/CD =====
+# GitHub workflows and CI/CD configuration
+/.github/ @brendadeeznuts1111
+/.github/workflows/ @brendadeeznuts1111
+/.github/workflows/bun-ci.yml @brendadeeznuts1111
 
-# ===== CITADEL REGISTRY & VAULT =====
-# Registry system, vault storage, and indexes
-/.citadel/ @syndicate-gov/citadel-team @syndicate-gov/security-team
-/.citadel/registry/ @syndicate-gov/registry-team @syndicate-gov/citadel-team
-/.citadel/vault/ @syndicate-gov/security-team @syndicate-gov/citadel-team
-/.citadel/indexes/ @syndicate-gov/registry-team @syndicate-gov/data-team
+# ===== DOCUMENTATION =====
+# Documentation and guides
+/docs/ @brendadeeznuts1111
+/docs/*.md @brendadeeznuts1111
+/docs/ULTRA_LOCKED_GATE_V1.10.md @brendadeeznuts1111
+/docs/SELF_ORGANIZING_TAG_MATRIX_V1.12.md @brendadeeznuts1111
 
-# ===== SPECIALIZED SYSTEMS =====
-# Rituals, governance, and specialized enterprise features
-/src/rituals/ @syndicate-gov/rituals-team @syndicate-gov/automation-team
-/src/governance/ @syndicate-gov/governance-team @syndicate-gov/compliance-team
-/src/enterprise-supreme/ @syndicate-gov/enterprise-team @syndicate-gov/maintainers
+# ===== SCRIPTS & AUTOMATION =====
+# Scripts and automation tools
+/scripts/ @brendadeeznuts1111
+/scripts/ultra-locked-check.sh @brendadeeznuts1111
 
-# ===== EMERGENCY & CRITICAL SYSTEMS =====
-# Emergency overrides and critical system components
-/CRITICAL-@syndicate-gov/security-team @syndicate-gov/maintainers
-/EMERGENCY-* @syndicate-gov/maintainers @syndicate-gov/security-team
-/SECURITY-* @syndicate-gov/security-team @syndicate-gov/compliance-team
+# ===== AI ROUTES & HANDLERS =====
+# AI-powered route handlers
+/routes/ai/ @brendadeeznuts1111
+/routes/ai/*.ts @brendadeeznuts1111
 
-# ===== APProvers =====
-# Default approvers for enterprise-level changes
-*.md @syndicate-gov/docs-team @syndicate-gov/maintainers
-*.yaml @syndicate-gov/config-team @syndicate-gov/devops-team
-*.json @syndicate-gov/config-team @syndicate-gov/data-team
-*.ts @syndicate-gov/core-team @syndicate-gov/typescript-team
-*.js @syndicate-gov/core-team @syndicate-gov/javascript-team
+# ===== CONFIGURATION =====
+# Configuration files
+bun.test.toml @brendadeeznuts1111
+package.json @brendadeeznuts1111
+
+# ===== TOOLS & UTILITIES =====
+# Development tools and utilities
+/tools/ @brendadeeznuts1111
+/tools/uuid.ts @brendadeeznuts1111
+
+# ===== GIT HOOKS =====
+# Pre-commit and pre-push hooks
+/.husky/ @brendadeeznuts1111
+/.husky/pre-push @brendadeeznuts1111
+
+# ===== CITADEL SYSTEM =====
+# Citadel registry and indexes
+/.citadel/ @brendadeeznuts1111
+/.citadel/indexes/ @brendadeeznuts1111
+/.citadel/indexes/.tags.index @brendadeeznuts1111
