@@ -1,4 +1,4 @@
-# bun.yaml - Syndicate GOV Config
+# bun.yaml - Syndicate GOV Config + API Routing Citadel
 catalog:
   react: "18.3.1"
   typescript: "5.0.4"
@@ -15,6 +15,71 @@ workspaces:
     - "packages/*"
 registry:
   path: ~/.syndicate/registry
+
+# API Routing + OpenAPI Forge v3.1
+api:
+  basePath: /api
+  version: 1.3.0
+  openapi:
+    output: ./docs/openapi.yaml
+    title: Syndicate Dashboard API
+    description: Bun-powered, YAML-governed, grep-first REST + WS
+    servers:
+      - url: https://api.syndicate.gov
+        description: Production Vault
+      - url: ws://localhost:3003
+        description: Local WS Broadcast
+  routes:
+    - path: /config/{hash}
+      method: GET
+      id: get-config-by-hash
+      handler: ./routes/config/get-by-hash.ts
+      auth: vault
+      response:
+        200:
+          schema: ConfigResponse
+          example: { hash: "abc123", data: "!encrypted ${VAULT:api/main}" }
+        404: { schema: Error }
+      tags: [config, yaml]
+      summary: Retrieve interpolated YAML by hash
+      sourcemap: true
+
+    - path: /config/store
+      method: POST
+      id: store-yaml-config
+      handler: ./routes/config/store.ts
+      auth: csrf+vault
+      request:
+        schema: StoreRequest
+        required: true
+      response:
+        201: { schema: StoreResponse }
+      tags: [config, write]
+      summary: Store YAML with auto-interpolation & zstd
+      sourcemap: true
+
+    - path: /ws/config-update
+      method: WS
+      id: ws-live-config
+      handler: ./routes/ws/config-broadcast.ts
+      auth: csrf
+      subprotocol: dashboard-v1.3
+      tags: [realtime, ws]
+      summary: Live YAML diff stream with permessage-deflate
+      sourcemap: true
+
+    - path: /config/validate
+      method: POST
+      id: validate-yaml-schema
+      handler: ./routes/config/validate.ts
+      auth: csrf
+      request: { schema: YAMLString }
+      response:
+        200: { schema: ValidationResult }
+        400: { schema: ValidationError }
+      tags: [config, validate]
+      summary: Schema-check YAML before store
+      sourcemap: true
 # Enhanced Authentication & Security Configuration
 security:
   scanner: "@socketsecurity/bun-security-scanner"
@@ -302,3 +367,14 @@ rules:
     hooks:
       - parse-headers: true
       - grep-index: true
+
+# AI Route Suggester Configuration
+ai:
+  suggester:
+    enabled: true
+    cron: '0 3 * * *'          # 03:00 UTC – zero-traffic window
+    logGlob: ./logs/access.sample.ndjson
+    minConfidence: 0.88        # cosine similarity vs existing routes
+    maxNewPerRun: 5            # guardrail – no blast radius
+    autoPR: true               # opens PR, does NOT merge
+    commitMsg: 'feat(ai): suggested routes from ${{ .runId }}'
