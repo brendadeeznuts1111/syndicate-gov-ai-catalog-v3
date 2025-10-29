@@ -20,7 +20,7 @@ api:
   basePath: /api
   version: 1.3.0
   openapi:
-    output: ./docs/openapi.yaml
+    output: ./docs/08-api-reference/openapi.yaml
     title: Syndicate Dashboard API
     description: Bun-powered, YAML-governed, grep-first REST + WS
     servers:
