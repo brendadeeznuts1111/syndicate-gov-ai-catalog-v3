@@ -1,0 +1,127 @@
+rules:
+  header:
+    schema:
+      scope:
+        - GOV
+        - SEC
+        - OPS
+        - ALERT
+        - BASH
+        - DASHBOARD
+        - ETL
+      type:
+        - RULES
+        - SCRIPT
+        - CONFIG
+        - MULTI-ETL
+      variant:
+        - EXPANDED
+        - COMPACT
+        - LIVE
+        - DEV
+        - TEST
+        - DEPRECATED
+        - SCRIPT
+        - YAML
+      id:
+        pattern: '^[A-Z]{3,4}-[A-Z0-9-]{4,12}-[0-9]{3}$'
+      version:
+        semver: '^v[0-9]+\.[0-9]+\.[0-9]+$|^v[0-9]+\.[0-9]+$'
+      status:
+        - LIVE
+        - DEV
+        - TEST
+        - DEPRECATED
+        - REQUIRED
+        - STANDARD
+        - OPTIONAL
+    defaults:
+      scope: GOV
+      type: RULES
+      variant: ''
+      version: v2.9
+      status: ACTIVE
+api:
+  basePath: /api
+  version: 1.3.0
+  openapi:
+    output: ./docs/08-api-reference/openapi.yaml
+    title: Syndicate Dashboard API
+    description: Bun-powered, YAML-governed, grep-first REST + WS
+    servers:
+      - url: https://api.syndicate.gov
+        description: Production Vault
+      - url: ws://localhost:3003
+        description: Local WS Broadcast
+  docs:
+    enabled: true
+    path: /_docs        # Swagger UI
+    redoc: /_redoc      # ReDoc (optional)
+    openapi: /openapi.yaml
+  routes:
+    # Unified SQL API Routes
+    - path: /api/sql/query
+      method: POST
+      id: unified-sql-query
+      handler: ./routes/sql/query.ts
+      auth: jwt
+      request:
+        schema: SQLQueryRequest
+        required: true
+      response:
+        200: { schema: SQLQueryResponse }
+        401: { schema: Error }
+        500: { schema: SQLError }
+      tags: [sql, database, unified]
+      summary: Unified SQL query endpoint
+      sourcemap: true
+
+    - path: /api/sql/users
+      method: GET
+      id: sql-users-list
+      handler: ./routes/sql/users.ts
+      auth: jwt
+      parameters:
+        - name: limit
+          in: query
+          schema: { type: number }
+        - name: offset
+          in: query
+          schema: { type: number }
+      response:
+        200: { schema: SQLUsersResponse }
+        401: { schema: Error }
+      tags: [sql, users, database]
+      summary: SQL-based user listing
+      sourcemap: true
+
+    - path: /api/sql/analytics
+      method: GET
+      id: sql-analytics
+      handler: ./routes/sql/analytics.ts
+      auth: jwt
+      parameters:
+        - name: startDate
+          in: query
+          schema: { type: string, format: date }
+        - name: endDate
+          in: query
+          schema: { type: string, format: date }
+      response:
+        200: { schema: SQLAnalyticsResponse }
+        401: { schema: Error }
+      tags: [sql, analytics, reports]
+      summary: SQL analytics and reporting
+      sourcemap: true
+
+    - path: /api/sql/health
+      method: GET
+      id: sql-health-check
+      handler: ./routes/sql/health.ts
+      auth: jwt
+      response:
+        200: { schema: SQLHealthResponse }
+        401: { schema: Error }
+      tags: [sql, health, monitoring]
+      summary: Database health and performance metrics
+      sourcemap: true

@@ -22,10 +22,10 @@ class AIYAMLGenerator {
   async loadConfig() {
     if (!this.config) {
       try {
-        const yamlContent = await file('config/bun.yaml').text();
+        const yamlContent = await file('config/bun-minimal.yaml').text();
         this.config = YAML.parse(yamlContent);
       } catch (error) {
-        console.error('❌ Failed to load bun.yaml:', error.message);
+        console.error('❌ Failed to load bun-minimal.yaml:', error.message);
         throw error;
       }
     }

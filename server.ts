@@ -22,7 +22,7 @@ class APIServer {
   private handlers: Map<string, any> = new Map();
 
   async loadConfig() {
-    const configText = await file('config/bun.yaml').text();
+    const configText = await file('config/bun-minimal.yaml').text();
     this.config = YAML.parse(configText);
     
     // Load routes into memory

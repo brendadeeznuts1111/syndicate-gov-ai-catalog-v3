@@ -639,7 +639,7 @@ rules:
         - '--max-columns'
         - '150'
         - '--max-columns-preview'
-      rg-flags: '--type md --no-heading --with-filename --colors match:fg:yellow:style:bold'
+    rg-flags: '--type md --no-heading --with-filename --colors match:fg:yellow:style:bold'
   validate:
     hooks:
       - parse-headers: true
