@@ -448,4 +448,54 @@ bun run app.ts
 bun --profile run app.ts
 ```
 
-Your Citadel platform now has **enterprise-grade Bun runtime optimization** with advanced CLI configuration, preload scripts, SQL optimization, and performance monitoring! 🚀
+### Standalone Executable Control
+
+Bun v1.3 introduces the `BUN_BE_BUN` environment variable for standalone executables created with `bun build --compile`:
+
+#### Building Standalone Executables
+```bash
+# Build an executable
+bun build --compile ./app.ts --outfile myapp
+
+# Run the embedded app (default behavior)
+./myapp
+
+# Run Bun itself, ignoring the embedded app
+BUN_BE_BUN=1 ./myapp --version
+```
+
+#### Configuration
+```yaml
+bun:
+  standalone:
+    beBun:
+      enabled: true
+      description: "Run Bun binary instead of embedded entry point"
+      usage: "BUN_BE_BUN=1 ./myapp --version"
+```
+
+#### Available Scripts
+```bash
+bun run bun:build-executable    # Build standalone executable
+bun run bun:run-binary         # Run with BUN_BE_BUN=1
+bun run bun:executable-demo   # Build and demonstrate
+bun run standalone:build       # Build demo executable
+bun run standalone:demo        # Full demonstration
+bun run standalone:run-bun     # Run Bun binary
+bun run standalone:cleanup     # Clean up demo files
+```
+
+#### Use Cases
+- **Debugging**: Access Bun CLI features from within executable
+- **Version Checking**: Verify Bun version in production
+- **Testing**: Test different Bun configurations
+- **Development**: Debug embedded application issues
+
+#### Demo Script
+```typescript
+// scripts/standalone-demo.ts demonstrates BUN_BE_BUN functionality
+await buildExecutable();           // Build standalone executable
+await runEmbeddedApp();           // Run embedded application
+await runBunBinary();             // Run Bun binary instead
+await demonstrateUsage();         // Show both behaviors
+```

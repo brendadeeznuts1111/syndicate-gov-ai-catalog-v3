@@ -198,6 +198,14 @@ bun:
       max: 10
       idleTimeout: 30000
       
+  # Standalone Executable Control
+  standalone:
+    # BUN_BE_BUN environment variable for compiled executables
+    beBun:
+      enabled: true
+      description: "Run Bun binary instead of embedded entry point"
+      usage: "BUN_BE_BUN=1 ./myapp --version"
+      
   # Performance Optimizations
   performance:
     # Memory management
