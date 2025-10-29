@@ -1,0 +1,11 @@
+# GitHub Topics for Syndicate GO v3.0
+bun
+typescript
+monorepo
+governance
+ci-cd
+header-validation
+enterprise
+validation
+grepable
+syndicate-gov

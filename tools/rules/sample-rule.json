@@ -1,0 +1,13 @@
+{
+  "name": "Sample Security Rule",
+  "description": "A sample governance rule for demonstration",
+  "category": "SECURITY",
+  "trigger": "security.violation.detected",
+  "action": "block.ip + alert.admin",
+  "priority": "REQUIRED",
+  "tags": [
+    "security",
+    "auto-enforce"
+  ],
+  "emoji": "🛡️"
+}

@@ -1,0 +1,137 @@
+# .github/workflows/performance.yml - Performance Benchmarking
+name: Performance Benchmarks
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 6 * * *'  # Daily at 6 AM UTC
+  workflow_dispatch:
+
+jobs:
+  benchmark:
+    name: Performance Benchmarks
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Bun 1.3
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.0
+          cache: 'bun'
+
+      - name: Install Dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Benchmark HEADER Validation
+        run: |
+          echo "🔍 Benchmarking HEADER validation..."
+          START=$(date +%s%N)
+          bun run ci:validate
+          END=$(date +%s%N)
+          VALIDATION_TIME=$((($END - $START) / 1000000))
+          echo "HEADER_VALIDATION_TIME=${VALIDATION_TIME}ms" >> $GITHUB_ENV
+
+      - name: Benchmark Grepable Search
+        run: |
+          echo "🏷️ Benchmarking grepable search..."
+          START=$(date +%s%N)
+          COUNT=$(bun run grep:tags | rg -c '\[' || echo "0")
+          END=$(date +%s%N)
+          SEARCH_TIME=$((($END - $START) / 1000000))
+          echo "GREPABLE_SEARCH_TIME=${SEARCH_TIME}ms" >> $GITHUB_ENV
+          echo "GREPABLE_TAGS_COUNT=${COUNT}" >> $GITHUB_ENV
+
+      - name: Benchmark Version Operations
+        run: |
+          echo "🔢 Benchmarking version operations..."
+          START=$(date +%s%N)
+          bun run citadel pm:version:validate
+          END=$(date +%s%N)
+          VERSION_TIME=$((($END - $START) / 1000000))
+          echo "VERSION_VALIDATION_TIME=${VERSION_TIME}ms" >> $GITHUB_ENV
+
+      - name: Benchmark Registry Operations
+        run: |
+          echo "📦 Benchmarking registry operations..."
+          START=$(date +%s%N)
+          bun run citadel registry:list
+          END=$(date +%s%N)
+          REGISTRY_TIME=$((($END - $START) / 1000000))
+          echo "REGISTRY_TIME=${REGISTRY_TIME}ms" >> $GITHUB_ENV
+
+      - name: Generate Performance Report
+        run: |
+          cat << EOF > performance-report.md
+          # 📊 Performance Benchmark Report
+          
+          **Date**: $(date -u +"%Y-%m-%d %H:%M:%S UTC")
+          **Commit**: ${{ github.sha }}
+          **Branch**: ${{ github.ref_name }}
+          
+          ## 🚀 Performance Metrics
+          
+          | Metric | Time | Status |
+          |--------|------|--------|
+          | HEADER Validation | ${{ env.HEADER_VALIDATION_TIME }}ms | $([ ${{ env.HEADER_VALIDATION_TIME }} -lt 50 ] && echo "✅ Excellent" || [ ${{ env.HEADER_VALIDATION_TIME }} -lt 100 ] && echo "🟡 Good" || echo "❌ Needs Improvement") |
+          | Grepable Search | ${{ env.GREPABLE_SEARCH_TIME }}ms | $([ ${{ env.GREPABLE_SEARCH_TIME }} -lt 30 ] && echo "✅ Excellent" || [ ${{ env.GREPABLE_SEARCH_TIME }} -lt 60 ] && echo "🟡 Good" || echo "❌ Needs Improvement") |
+          | Version Validation | ${{ env.VERSION_VALIDATION_TIME }}ms | $([ ${{ env.VERSION_VALIDATION_TIME }} -lt 50 ] && echo "✅ Excellent" || [ ${{ env.VERSION_VALIDATION_TIME }} -lt 100 ] && echo "🟡 Good" || echo "❌ Needs Improvement") |
+          | Registry Operations | ${{ env.REGISTRY_TIME }}ms | $([ ${{ env.REGISTRY_TIME }} -lt 20 ] && echo "✅ Excellent" || [ ${{ env.REGISTRY_TIME }} -lt 40 ] && echo "🟡 Good" || echo "❌ Needs Improvement") |
+          
+          ## 📈 Statistics
+          
+          - **Grepable Tags Found**: ${{ env.GREPABLE_TAGS_COUNT }}
+          - **Total Validation Time**: $((${{ env.HEADER_VALIDATION_TIME }} + ${{ env.VERSION_VALIDATION_TIME }}))ms
+          - **Overall Performance**: $([ $((${{ env.HEADER_VALIDATION_TIME }} + ${{ env.VERSION_VALIDATION_TIME }} + ${{ env.GREPABLE_SEARCH_TIME }} + ${{ env.REGISTRY_TIME }})) -lt 200 ] && echo "🏆 Outstanding" || [ $((${{ env.HEADER_VALIDATION_TIME }} + ${{ env.VERSION_VALIDATION_TIME }} + ${{ env.GREPABLE_SEARCH_TIME }} + ${{ env.REGISTRY_TIME }})) -lt 400 ] && echo "✅ Excellent" || echo "🟡 Good")
+          
+          ## 🎯 Targets vs Actual
+          
+          | Target | Actual | Status |
+          |--------|--------|--------|
+          | HEADER Validation < 50ms | ${{ env.HEADER_VALIDATION_TIME }}ms | $([ ${{ env.HEADER_VALIDATION_TIME }} -lt 50 ] && echo "✅ Met" || echo "❌ Missed") |
+          | Grepable Search < 30ms | ${{ env.GREPABLE_SEARCH_TIME }}ms | $([ ${{ env.GREPABLE_SEARCH_TIME }} -lt 30 ] && echo "✅ Met" || echo "❌ Missed") |
+          | Version Validation < 50ms | ${{ env.VERSION_VALIDATION_TIME }}ms | $([ ${{ env.VERSION_VALIDATION_TIME }} -lt 50 ] && echo "✅ Met" || echo "❌ Missed") |
+          | Registry Operations < 20ms | ${{ env.REGISTRY_TIME }}ms | $([ ${{ env.REGISTRY_TIME }} -lt 20 ] && echo "✅ Met" || echo "❌ Missed") |
+          
+          ---
+          *Generated by Bun 1.3 Performance CI • $(date -u +"%Y-%m-%d %H:%M:%S UTC")*
+          EOF
+
+      - name: Upload Performance Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: performance-report
+          path: performance-report.md
+          retention-days: 30
+
+      - name: Comment PR with Performance Results
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const report = fs.readFileSync('performance-report.md', 'utf8');
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `## 📊 Performance Benchmark Results\n\n${report}`
+            });
+
+      - name: Check Performance Regression
+        run: |
+          TOTAL_TIME=$((${{ env.HEADER_VALIDATION_TIME }} + ${{ env.VERSION_VALIDATION_TIME }} + ${{ env.GREPABLE_SEARCH_TIME }} + ${{ env.REGISTRY_TIME }}))
+          
+          if [ $TOTAL_TIME -gt 500 ]; then
+            echo "❌ Performance regression detected: Total time ${TOTAL_TIME}ms > 500ms"
+            echo "::warning ::Performance regression detected - Total time exceeded 500ms"
+            exit 1
+          else
+            echo "✅ Performance benchmarks passed: Total time ${TOTAL_TIME}ms"
+          fi

@@ -1,0 +1,54 @@
+{
+  "name": "syndicate-gov-monorepo",
+  "description": "🚀 Syndicate GOV v3.0 - Enterprise Header Governance with Bun 1.3 Superpowers",
+  "homepage": "https://github.com/syndicate-gov/ai-catalog-v3",
+  "private": false,
+  "license": "MIT",
+  "author": {
+    "name": "Syndicate GOV",
+    "email": "citadel@syndicate.gov",
+    "url": "https://syndicate.gov"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/syndicate-gov/ai-catalog-v3.git"
+  },
+  "bugs": {
+    "url": "https://github.com/syndicate-gov/ai-catalog-v3/issues"
+  },
+  "keywords": [
+    "syndicate",
+    "gov",
+    "ai-catalog",
+    "header-logic",
+    "monorepo",
+    "bun",
+    "typescript",
+    "v3",
+    "governance",
+    "ci-cd",
+    "enterprise",
+    "validation",
+    "grepable"
+  ],
+  "engines": {
+    "bun": ">=1.3.0",
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "prepare": "bun run build",
+    "precommit": "bun run validate:headers && bun run pr:enforce",
+    "prepush": "bun run ci:full"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "bun run precommit",
+      "pre-push": "bun run prepush"
+    }
+  }
+}

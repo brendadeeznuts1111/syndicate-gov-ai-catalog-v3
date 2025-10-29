@@ -1,0 +1,15 @@
+# .ripgreprc - Syndicate GOV Ripgrep Configuration
+--type-add 'md:*.md'
+--type-add 'yaml:*.yaml'
+--type-add 'yml:*.yml'
+--smart-case
+--hidden
+-g '!node_modules/**'
+-g '!.git/**'
+-g '!dist/**'
+-g '!.citadel/indexes/.tags.index'
+--colors match:fg:green
+--colors line:fg:yellow
+--colors path:fg:blue
+--max-columns 150
+--max-columns-preview

@@ -1,0 +1,92 @@
+{
+  "name": "syndicate-gov-monorepo",
+  "version": "3.0.1",
+  "description": "Enhanced with catalog-driven monorepo support",
+  "workspaces": [
+    "packages/*"
+  ],
+  "catalog": {
+    "react": "^18.3.3",
+    "typescript": "^5.0.6",
+    "zod": "^3.24.3",
+    "uuid": "^10.0.2"
+  },
+  "catalogs": {
+    "testing": {
+      "jest": "29.6.2",
+      "react-testing-library": "14.0.0"
+    },
+    "build": {
+      "esbuild": "0.19.0"
+    }
+  },
+  "bin": {
+    "ai-version": "dist/ai-version.js",
+    "gov-validate": "dist/validate.js",
+    "alias": "tools/alias-system/bin/alias-cli.ts",
+    "bun-alias": "tools/alias-system/bin/alias-cli.ts",
+    "citadel": "src/citadel/cli/main.ts"
+  },
+  "scripts": {
+    "ai-version": "bun run tools/alias-system/src/ai-generator.ts",
+    "alias:generate": "bun run tools/alias-system/bin/alias-cli.ts generate",
+    "alias:validate": "bun run tools/alias-system/bin/alias-cli.ts validate",
+    "alias:query": "bun run tools/alias-system/bin/alias-cli.ts query",
+    "alias:fuzzy": "bun run tools/alias-system/bin/alias-cli.ts fuzzy",
+    "alias:complex": "bun run tools/alias-system/bin/alias-cli.ts complex",
+    "alias:search": "bun run tools/alias-system/bin/alias-cli.ts search",
+    "rules:validate": "bun run tools/scripts/validate.js headers",
+    "rules:index": "bun run tools/scripts/validate.js index",
+    "rules:config": "bun run examples/templates/header-gen.js --help",
+    "header:generate": "bun run examples/templates/header-gen.js",
+    "validate:headers": "bun run src/validation/validate-headers.ts",
+    "validate:sandbox": "bun run src/validation/validate-sandbox.ts",
+    "ci:validate": "bun run scripts/ci-validate.ts",
+    "ci:grep": "bun run grep:tags && bun run grep:required",
+    "ci:dashboard": "bun run citadel pm:version:validate",
+    "ci:security": "bun run validate:sandbox && bun run grep:security",
+    "ci:full": "bun ci:validate && bun ci:grep && bun ci:dashboard && bun ci:security",
+    "pr:enforce": "bun run scripts/pr-enforce.ts",
+    "pr:header": "bun run scripts/pr-enforce.ts HEADER-LOGIC",
+    "pr:security": "bun run scripts/pr-enforce.ts SECURITY-SCAN",
+    "grep:tags": "rg --type sh --type yaml --type ts '\\[[a-z0-9.-]+\\]' --colors match:fg:green --colors path:fg:blue",
+    "grep:required": "rg '\\[.*REQUIRED\\]' --type md --colors match:fg:red",
+    "grep:active": "rg '\\[.*ACTIVE\\]' --type md --colors match:fg:blue",
+    "grep:security": "rg '\\[SEC\\]' --type md --colors match:fg:red",
+    "grep:gov": "rg '\\[GOV\\]' --type md --colors match:fg:magenta",
+    "grep:cli": "rg --type ts '\\[CLI\\].*\\[LIVE\\]' --colors match:fg:cyan --colors path:fg:blue",
+    "grep:core": "rg --type ts '\\[CORE\\].*\\[LIVE\\]' --colors match:fg:yellow --colors path:fg:blue",
+    "grep:registry": "rg --type ts '\\[REGISTRY\\].*\\[LIVE\\]' --colors match:fg:magenta --colors path:fg:blue",
+    "validate:all": "bun run validate:headers && bun run validate:sandbox",
+    "citadel": "bun run ./src/citadel/cli/main.ts",
+    "citadel:init": "bun run ./src/citadel/cli/main.ts init",
+    "citadel:install": "bun run ./src/citadel/cli/main.ts install",
+    "citadel:publish": "bun run ./src/citadel/cli/main.ts publish",
+    "citadel:gov": "bun run ./src/citadel/cli/main.ts gov:rule",
+    "citadel:dashboard": "bun run ./src/citadel/cli/main.ts gov:dashboard",
+    "citadel:perf": "bun run ./src/citadel/cli/main.ts perf:analyze",
+    "citadel:status": "bun run ./src/citadel/cli/main.ts status",
+    "citadel:registry": "bun run ./src/citadel/cli/main.ts registry:list",
+    "dev": "bun --watch server.ts",
+    "build": "bun build --compile ./server.ts --outfile ~/.syndicate/bin/syndicate-app --title 'Syndicate GOV' --version '3.0.1'",
+    "test": "bun test",
+    "lint": "bun tsc --noEmit"
+  },
+  "dependencies": {
+    "bun": "^1.3.0"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.3.0",
+    "typescript": "^5.0.4"
+  },
+  "keywords": [
+    "syndicate",
+    "gov",
+    "ai-catalog",
+    "header-logic",
+    "monorepo",
+    "v3"
+  ],
+  "author": "Syndicate GOV",
+  "license": "MIT"
+}

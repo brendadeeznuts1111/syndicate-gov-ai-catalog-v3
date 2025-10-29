@@ -1,0 +1,101 @@
+# bun.yaml - Syndicate GOV Config
+catalog:
+  react: "18.3.1"
+  typescript: "5.0.4"
+  zod: "3.24.1"
+  uuid: "10.0.0"
+catalogs:
+  testing:
+    jest: 29.6.2
+    react-testing-library: 14.0.0
+  build:
+    esbuild: 0.19.0
+workspaces:
+  packages:
+    - "packages/*"
+registry:
+  path: ~/.syndicate/registry
+security:
+  scanner: "@socketsecurity/bun-security-scanner"
+  minimumReleaseAge: 604800
+
+# Enhanced HEADER Logic Configuration
+rules:
+  header:
+    schema:
+      scope:
+        - GOV
+        - SEC
+        - OPS
+        - ALERT
+        - BASH
+        - DASHBOARD
+        - ETL
+      type:
+        - RULES
+        - SCRIPT
+        - CONFIG
+        - MULTI-ETL
+      variant:
+        - EXPANDED
+        - COMPACT
+        - LIVE
+        - DEV
+        - TEST
+        - DEPRECATED
+        - SCRIPT
+        - YAML
+      id:
+        pattern: '^[A-Z]{3,4}-[A-Z0-9-]{4,12}-[0-9]{3}$'
+      version:
+        semver: '^v[0-9]+\.[0-9]+\.[0-9]+$|^v[0-9]+\.[0-9]+$'
+      status:
+        - LIVE
+        - DEV
+        - TEST
+        - DEPRECATED
+        - REQUIRED
+        - STANDARD
+        - OPTIONAL
+    defaults:
+      scope: GOV
+      type: RULES
+      variant: ''
+      version: v2.9
+      status: ACTIVE
+    grep:
+      patterns:
+        all-tags: '\[[a-z0-9.-]+\]'
+        by-scope: '\[GOV\-[A-Z]+\-[A-Z+\-'
+        required-only: '\[.*REQUIRED\]'
+      flags:
+        - '--type-add'
+        - 'sh:*.sh'
+        - '--type-add'
+        - 'yaml:*.yaml'
+        - '--type-add'
+        - 'yml:*.yml'
+        - '--smart-case'
+        - '--hidden'
+        - '-g'
+        - '!node_modules/**'
+        - '-g'
+        - '!.git/**'
+        - '-g'
+        - '!dist/**'
+        - '-g'
+        - '!.citadel/indexes/.tags.index'
+        - '--colors'
+        - 'match:fg:green'
+        - '--colors'
+        - 'line:fg:yellow'
+        - '--colors'
+        - 'path:fg:blue'
+        - '--max-columns'
+        - '150'
+        - '--max-columns-preview'
+      rg-flags: '--type md --no-heading --with-filename --colors match:fg:yellow:style:bold'
+  validate:
+    hooks:
+      - parse-headers: true
+      - grep-index: true

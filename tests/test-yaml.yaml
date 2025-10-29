@@ -1,0 +1,22 @@
+rules:
+  header:
+    schema:
+      scope:
+        - GOV
+        - SEC
+        - OPS
+      type:
+        - RULES
+        - SUMMARY
+      variant:
+        - EXPANDED
+        - BASH
+      status:
+        - ACTIVE
+        - DRAFT
+        - REQUIRED
+    defaults:
+      scope: GOV
+      type: RULES
+      variant: ''
+      status: ACTIVE

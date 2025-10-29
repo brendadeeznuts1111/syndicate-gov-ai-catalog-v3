@@ -1,0 +1,38 @@
+{
+  "id": "SEC-ETL-001",
+  "name": "ETL Pipeline Security Rule",
+  "category": "SECURITY",
+  "trigger": "etl.pipeline.validation",
+  "action": "validate.schema + encrypt.data + audit.log",
+  "priority": "REQUIRED",
+  "version": "1.0.0",
+  "enforcement": {
+    "trigger": "etl.pipeline.validation",
+    "action": "validate.schema + encrypt.data + audit.log",
+    "conditions": {
+      "dataVolume": "> 1GB",
+      "sensitivity": "HIGH",
+      "compliance": ["GDPR", "SOC2"]
+    },
+    "fallback": "block.pipeline + alert.admin",
+    "monitoring": {
+      "enabled": true,
+      "metrics": ["execution_time", "success_rate", "data_throughput", "encryption_time"],
+      "alerts": {
+        "enabled": true,
+        "thresholds": {
+          "failure_rate": 0.01,
+          "execution_time": 5000,
+          "encryption_time": 1000
+        },
+        "notifications": ["console", "websocket", "email"]
+      }
+    }
+  },
+  "metadata": {
+    "author": "Citadel Security Team",
+    "description": "Comprehensive security validation for ETL pipelines with encryption and auditing",
+    "tags": ["security", "etl", "encryption", "validation", "compliance"],
+    "dependencies": ["crypto", "audit-logger", "schema-validator"]
+  }
+}

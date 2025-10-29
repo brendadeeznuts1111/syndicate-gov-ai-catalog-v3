@@ -1,0 +1,165 @@
+# Dashboard Config
+[DASHBOARD][CONFIG][YAML][DASH-CONFIG-001][v2.1][LIVE]
+# Grepable: [dashboard-config-yaml-dash-config-001-v2.1-live]
+
+app:
+  version: ${APP_VERSION:2.1.0}
+  react:
+    catalog:
+      enabled: true
+      endpoint: "http://localhost:3001/api/catalog"
+      cache:
+        ttl: 300000  # 5 minutes
+        maxSize: 1000
+  
+  performance:
+    metrics:
+      enabled: true
+      interval: 5000  # 5 seconds
+      endpoints:
+        - "/api/metrics/performance"
+        - "/api/metrics/headers"
+        - "/api/metrics/validation"
+    
+    optimization:
+      parallel: true
+      maxConcurrency: 10
+      timeout: 30000
+    
+    benchmarks:
+      headerValidation:
+        target: 18  # ms
+        threshold: 50
+      yamlParsing:
+        target: 0.8  # ms
+        threshold: 5
+      grepSearch:
+        target: 38  # ms
+        threshold: 100
+
+server:
+  port: ${PORT:3000}
+  host: ${HOST:localhost}
+  
+  cors:
+    enabled: true
+    origins: ["http://localhost:3000", "http://localhost:3001"]
+  
+  websocket:
+    enabled: true
+    port: 3001
+    heartbeat: 30000
+    
+  security:
+    authentication:
+      enabled: true
+      type: "jwt"
+      secret: "${JWT_SECRET}"
+      
+    validation:
+      headers: true
+      schemas: true
+      sandbox: true
+
+database:
+  sqlite:
+    path: "./.citadel/catalog.db"
+    pool:
+      min: 2
+      max: 10
+      timeout: 30000
+    
+  redis:
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
+    db: 0
+    
+  preconnect: true
+  analyze: true
+
+governance:
+  rules:
+    validation:
+      enabled: true
+      schema: "bun.yaml"
+      timeout: 1000
+      
+    enforcement:
+      autoEnforce: true
+      monitoring: true
+      alerts: true
+      
+  headers:
+    grepable: true
+    patterns:
+      allTags: "\\[[a-z0-9-]+\\]"
+    
+    scopes: ["GOV", "ETL", "DASHBOARD", "BASH", "SEC"]
+    types: ["RULES", "CONFIG", "SCRIPT", "MULTI-ETL"]
+    variants: ["EXPANDED", "COMPACT", "LIVE", "DEV"]
+    statuses: ["LIVE", "DEV", "TEST", "DEPRECATED"]
+
+monitoring:
+  enabled: true
+  
+  metrics:
+    collection:
+      interval: 5000
+      retention: 86400000  # 24 hours
+      
+    alerts:
+      enabled: true
+      thresholds:
+        errorRate: 0.05  # 5%
+        responseTime: 1000  # 1 second
+        memoryUsage: 0.8  # 80%
+        
+  logging:
+    level: "info"
+    format: "json"
+    outputs: ["console", "file"]
+    
+    file:
+      path: "./.citadel/logs/dashboard.log"
+      maxSize: "10MB"
+      maxFiles: 5
+
+features:
+  aiCatalog:
+    enabled: true
+    provider: "openai"
+    model: "gpt-4"
+    maxTokens: 2000
+    
+  hotReload:
+    enabled: true
+    watchFiles: true
+    debounce: 100
+    
+  performanceOptimization:
+    enabled: true
+    parallelProcessing: true
+    smartCaching: true
+    
+  security:
+    enabled: true
+    sandboxValidation: true
+    threatDetection: true
+
+deployment:
+  environment: ${ENVIRONMENT:development}
+  
+  build:
+    optimize: true
+    minify: true
+    target: "bun"
+    
+  security:
+    cveScan: true
+    minimumReleaseAge: 604800  # 7 days
+    
+  performance:
+    targets:
+      bundleSize: "1MB"
+      loadTime: 500  # ms
+      firstContentfulPaint: 300  # ms
