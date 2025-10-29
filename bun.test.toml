@@ -1,0 +1,36 @@
+# bun.test.toml - Citadel Test Configuration
+
+[test]
+# Test file patterns
+test_match = ["**/*.test.ts", "**/*.spec.ts"]
+test_ignore = ["**/node_modules/**", "**/dist/**"]
+
+# Coverage settings
+coverage = true
+coverage_dir = "./coverage"
+coverage_threshold = 80
+
+# Reporter configuration
+reporter = ["dots", "junit"]
+reporter_dir = "./test-reports"
+
+# Test environment
+preload = ["./tests/setup.ts"]
+
+# Performance settings
+timeout = 30000
+concurrency = 4
+
+# Mock configuration
+mock_preserve = true
+
+# Watch mode (for development)
+watch = false
+
+# CI-specific settings
+[ci]
+coverage = true
+coverage_threshold = 85
+reporter = ["junit", "html"]
+timeout = 60000
+concurrency = 2
