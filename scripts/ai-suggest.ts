@@ -2,6 +2,7 @@
 // scripts/ai-suggest.ts – 29-line self-training route suggester
 import { $ } from 'bun';
 import { randomUUID, createHash } from 'crypto';
+import { rename } from 'fs/promises';
 import { cosine, loadLogs, vectorise } from '../src/ai/embedding';
 import { YAML } from 'bun';
 
@@ -76,7 +77,22 @@ if (!aiCfg?.enabled) process.exit(0);
 if (process.env.AI_HANDLER_WRITE === 'false') process.exit(0);
 
 const logs    = await loadLogs(aiCfg.logGlob);          // {method,path,status}
-const existing= [] as string[]; // Extract from cfg.api.routes if present
+const existing= cfg.api?.routes?.map((r: any) => r.path) || []; // Extract from cfg.api.routes
+
+// True idempotency: skip if we already have max handlers
+const existingHandlerCount = await (async () => {
+  let count = 0;
+  for (let i = 0; i < aiCfg.maxNewPerRun; i++) {
+    if (await Bun.file(`routes/ai/suggestion-${i}.ts`).exists()) count++;
+  }
+  return count;
+})();
+
+if (existingHandlerCount >= aiCfg.maxNewPerRun) {
+  console.log('🤖 AI suggested 0 new routes');
+  console.log('✅ Route suggestions generated successfully');
+  process.exit(0);
+}
 const vectors = await vectorise(logs);                  // 384-dim sentence-transformers
 const novel   = vectors.filter(v => v.score > aiCfg.minConfidence && !existing.some(e => v.path.match(e)));
 const picked  = novel.slice(0, aiCfg.maxNewPerRun);
@@ -103,7 +119,7 @@ for (const [i, route] of newRoutes.entries()) {
   const handlerContent = generateHandlerTemplate(route, picked[i]);
   const tmp = handlerPath + '.tmp';
   await Bun.write(tmp, handlerContent);
-  await Bun.rename(tmp, handlerPath);
+  await rename(tmp, handlerPath);
 }
 
 console.log(`🤖 AI suggested ${newRoutes.length} new routes:`, newRoutes.map(r => r.path));
