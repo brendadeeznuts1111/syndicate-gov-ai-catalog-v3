@@ -1,7 +1,9 @@
 // src/citadel/registry/local-registry.ts
 // [REGISTRY][SCRIPT][TYPESCRIPT][LOCAL-REGISTRY-001][v1.3.0][LIVE]
 // Grepable: [registry-script-typescript-local-registry-001-v1.3.0-live]
-
+// 🛡️ **Maintainers**: @syndicate-gov/registry-team
+// 🎯 **Semantic Tag**: 🔵 [REGISTRY-TEAM][LOCAL][SCRIPT][TYPESCRIPT]
+// 📊 **Coverage**: Multi-backend storage with SQLite, Redis, S3
 /**
  * Local Registry - Enhanced package and secret management system
  * 

@@ -1,3 +1,5 @@
+// [NETWORK][SERVICE][TYPESCRIPT][WS-MANAGER-001][v3.0][LIVE]
+// Grepable: [network-script-typescript-ws-manager-001-v3.0-live]
 // citadel/network/ws-manager.ts
 import { Bun } from 'bun';
 

@@ -1,4 +1,9 @@
+// [REGISTRY][SERVICE][TYPESCRIPT][UNIFIED-REGISTRY-001][v3.0][LIVE]
+// Grepable: [registry-script-typescript-unified-registry-001-v3.0-live]
 // citadel/registry/unified-registry.ts
+// 🛡️ **Maintainers**: @syndicate-gov/registry-team
+// 🎯 **Semantic Tag**: 🟡 [REGISTRY-TEAM][UNIFIED][SERVICE][TYPESCRIPT]
+// 📊 **Coverage**: Unified package resolution across multiple backends
 import { file, gzip, zstd } from 'bun';
 import { Package, PackageMetadata, ResolveRequest } from '../core/pm-core.js';
 

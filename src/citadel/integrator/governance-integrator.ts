@@ -1,3 +1,5 @@
+// [INTEGRATOR][SERVICE][TYPESCRIPT][GOV-INTEGRATOR-001][v3.0][LIVE]
+// Grepable: [integrator-service-typescript-gov-integrator-001-v3.0-live]
 // citadel/integrator/governance-integrator.ts
 import { file, YAML } from 'bun';
 

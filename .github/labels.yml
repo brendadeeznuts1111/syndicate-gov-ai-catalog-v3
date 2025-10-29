@@ -1,0 +1,418 @@
+labels:
+  # ===== TYPE LABELS - SEMANTIC BLUE/GREEN SCALE =====
+  # [GOV][LABELS][TYPE-ENHANCEMENT][v3.0][ACTIVE]
+  # Grepable: [gov-labels-type-enhancement-v3.0-active]
+  - name: "Type:Enhancement"
+    color: "0e8a16"
+    description: "New feature or improvement - positive change"
+    category: "type"
+  
+  # [GOV][LABELS][TYPE-BUG][v3.0][ACTIVE]
+  # Grepable: [gov-labels-type-bug-v3.0-active]
+  - name: "Type:Bug"
+    color: "d73a4a"
+    description: "Something isn't working - requires attention"
+    category: "type"
+  
+  # [GOV][LABELS][TYPE-DOCUMENTATION][v3.0][ACTIVE]
+  # Grepable: [gov-labels-type-documentation-v3.0-active]
+  - name: "Type:Documentation"
+    color: "0075ca"
+    description: "Documentation improvements or additions - knowledge building"
+    category: "type"
+  
+  # [GOV][LABELS][TYPE-MAINTENANCE][v3.0][ACTIVE]
+  # Grepable: [gov-labels-type-maintenance-v3.0-active]
+  - name: "Type:Maintenance"
+    color: "6f42c1"
+    description: "Maintenance tasks, dependencies, refactoring - foundation work"
+    category: "type"
+
+  # ===== PRIORITY LABELS - SEMANTIC URGENCY SCALE =====
+  # [GOV][LABELS][PRIORITY-CRITICAL][v3.0][ACTIVE]
+  # Grepable: [gov-labels-priority-critical-v3.0-active]
+  - name: "Priority:Critical"
+    color: "b60205"
+    description: "Critical priority - immediate attention required"
+    category: "priority"
+  
+  # [GOV][LABELS][PRIORITY-HIGH][v3.0][ACTIVE]
+  # Grepable: [gov-labels-priority-high-v3.0-active]
+  - name: "Priority:High"
+    color: "ee0701"
+    description: "High priority - important to address soon"
+    category: "priority"
+  
+  # [GOV][LABELS][PRIORITY-MEDIUM][v3.0][ACTIVE]
+  # Grepable: [gov-labels-priority-medium-v3.0-active]
+  - name: "Priority:Medium"
+    color: "fbca04"
+    description: "Medium priority - normal workflow"
+    category: "priority"
+  
+  # [GOV][LABELS][PRIORITY-LOW][v3.0][ACTIVE]
+  # Grepable: [gov-labels-priority-low-v3.0-active]
+  - name: "Priority:Low"
+    color: "1d76db"
+    description: "Low priority - nice to have, can wait"
+    category: "priority"
+
+  # ===== SCOPE LABELS - FUNCTIONAL COLOR CODING =====
+  # [GOV][LABELS][SCOPE-SECURITY][v3.0][ACTIVE]
+  # Grepable: [gov-labels-scope-security-v3.0-active]
+  - name: "Scope:Security"
+    color: "b60205"
+    description: "Security related changes - critical protection"
+    category: "scope"
+  
+  # [GOV][LABELS][SCOPE-PERFORMANCE][v3.0][ACTIVE]
+  # Grepable: [gov-labels-scope-performance-v3.0-active]
+  - name: "Scope:Performance"
+    color: "1d76db"
+    description: "Performance optimizations - speed and efficiency"
+    category: "scope"
+  
+  # [GOV][LABELS][SCOPE-AI][v3.0][ACTIVE]
+  # Grepable: [gov-labels-scope-ai-v3.0-active]
+  - name: "Scope:AI"
+    color: "8957e5"
+    description: "AI-powered features and enhancements - intelligent systems"
+    category: "scope"
+  
+  # [GOV][LABELS][SCOPE-ANALYTICS][v3.0][ACTIVE]
+  # Grepable: [gov-labels-scope-analytics-v3.0-active]
+  - name: "Scope:Analytics"
+    color: "0969da"
+    description: "Business intelligence and analytics features - data insights"
+    category: "scope"
+  
+  # [GOV][LABELS][SCOPE-COMPLIANCE][v3.0][ACTIVE]
+  # Grepable: [gov-labels-scope-compliance-v3.0-active]
+  - name: "Scope:Compliance"
+    color: "6f42c1"
+    description: "SOC2, ISO27001, and regulatory compliance - governance"
+    category: "scope"
+  
+  # [GOV][LABELS][SCOPE-QUANTUM][v3.0][ACTIVE]
+  # Grepable: [gov-labels-scope-quantum-v3.0-active]
+  - name: "Scope:Quantum"
+    color: "4c2c92"
+    description: "Quantum-safe security and post-quantum cryptography - future-proof"
+    category: "scope"
+  
+  # [GOV][LABELS][SCOPE-ENTERPRISE][v3.0][ACTIVE]
+  # Grepable: [gov-labels-scope-enterprise-v3.0-active]
+  - name: "Scope:Enterprise"
+    color: "161622"
+    description: "Enterprise-grade features and scaling - business ready"
+    category: "scope"
+  
+  # [GOV][LABELS][SCOPE-RITUALS][v3.0][ACTIVE]
+  # Grepable: [gov-labels-scope-rituals-v3.0-active]
+  - name: "Scope:Rituals"
+    color: "2ea043"
+    description: "Repository rituals and automation - operational excellence"
+    category: "scope"
+  
+  # [GOV][LABELS][SCOPE-VALIDATION][v3.0][ACTIVE]
+  # Grepable: [gov-labels-scope-validation-v3.0-active]
+  - name: "Scope:Validation"
+    color: "f7dfba"
+    description: "Header validation and governance rules - quality assurance"
+    category: "scope"
+
+  # ===== ENTERPRISE LABELS - CORPORATE GREEN SCALE =====
+  # [GOV][LABELS][ENTERPRISE-SCALABILITY][v3.0][ACTIVE]
+  # Grepable: [gov-labels-enterprise-scalability-v3.0-active]
+  - name: "Enterprise:Scalability"
+    color: "0e8a16"
+    description: "Global scaling and multi-region capabilities - growth"
+    category: "enterprise"
+  
+  # [GOV][LABELS][ENTERPRISE-INTEGRATION][v3.0][ACTIVE]
+  # Grepable: [gov-labels-enterprise-integration-v3.0-active]
+  - name: "Enterprise:Integration"
+    color: "1f883d"
+    description: "Third-party integrations and APIs - connectivity"
+    category: "enterprise"
+  
+  # [GOV][LABELS][ENTERPRISE-MONITORING][v3.0][ACTIVE]
+  # Grepable: [gov-labels-enterprise-monitoring-v3.0-active]
+  - name: "Enterprise:Monitoring"
+    color: "006b75"
+    description: "Real-time monitoring and alerting - observability"
+    category: "enterprise"
+  
+  # [GOV][LABELS][ENTERPRISE-AUTOMATION][v3.0][ACTIVE]
+  # Grepable: [gov-labels-enterprise-automation-v3.0-active]
+  - name: "Enterprise:Automation"
+    color: "0969da"
+    description: "Automated workflows and processes - efficiency"
+    category: "enterprise"
+
+  # ===== AI & INTELLIGENCE LABELS - PURPLE/INDIGO SCALE =====
+  # [GOV][LABELS][AI-ML-MODEL][v3.0][ACTIVE]
+  # Grepable: [gov-labels-ai-ml-model-v3.0-active]
+  - name: "AI:ML-Model"
+    color: "8957e5"
+    description: "Machine learning model improvements - learning systems"
+    category: "ai"
+  
+  # [GOV][LABELS][AI-PREDICTIVE][v3.0][ACTIVE]
+  # Grepable: [gov-labels-ai-predictive-v3.0-active]
+  - name: "AI:Predictive"
+    color: "6f42c1"
+    description: "Predictive analytics and forecasting - future insights"
+    category: "ai"
+  
+  # [GOV][LABELS][AI-CLASSIFICATION][v3.0][ACTIVE]
+  # Grepable: [gov-labels-ai-classification-v3.0-active]
+  - name: "AI:Classification"
+    color: "a475f9"
+    description: "AI classification and categorization - intelligent organization"
+    category: "ai"
+  
+  # [GOV][LABELS][AI-OPTIMIZATION][v3.0][ACTIVE]
+  # Grepable: [gov-labels-ai-optimization-v3.0-active]
+  - name: "AI:Optimization"
+    color: "bf85ff"
+    description: "AI-driven optimization algorithms - smart efficiency"
+    category: "ai"
+
+  # ===== SECURITY & COMPLIANCE LABELS - RED/PURPLE SECURITY SCALE =====
+  # [GOV][LABELS][SECURITY-QUANTUM-SAFE][v3.0][ACTIVE]
+  # Grepable: [gov-labels-security-quantum-safe-v3.0-active]
+  - name: "Security:Quantum-Safe"
+    color: "4c2c92"
+    description: "Post-quantum cryptography implementation - future security"
+    category: "security"
+  
+  # [GOV][LABELS][SECURITY-AUDIT][v3.0][ACTIVE]
+  # Grepable: [gov-labels-security-audit-v3.0-active]
+  - name: "Security:Audit"
+    color: "8250df"
+    description: "Security audit and compliance checks - verification"
+    category: "security"
+  
+  # [GOV][LABELS][SECURITY-BLOCKCHAIN][v3.0][ACTIVE]
+  # Grepable: [gov-labels-security-blockchain-v3.0-active]
+  - name: "Security:Blockchain"
+    color: "6f42c1"
+    description: "Blockchain integration and audit trails - immutable security"
+    category: "security"
+  
+  # [GOV][LABELS][COMPLIANCE-SOC2][v3.0][ACTIVE]
+  # Grepable: [gov-labels-compliance-soc2-v3.0-active]
+  - name: "Compliance:SOC2"
+    color: "8250df"
+    description: "SOC2 compliance requirements - enterprise trust"
+    category: "compliance"
+  
+  # [GOV][LABELS][COMPLIANCE-ISO27001][v3.0][ACTIVE]
+  # Grepable: [gov-labels-compliance-iso27001-v3.0-active]
+  - name: "Compliance:ISO27001"
+    color: "6f42c1"
+    description: "ISO 27001 compliance standards - international security"
+    category: "compliance"
+
+  # ===== PERFORMANCE & INFRASTRUCTURE LABELS - BLUE SPEED SCALE =====
+  # [GOV][LABELS][PERFORMANCE-ULTRA-FAST][v3.0][ACTIVE]
+  # Grepable: [gov-labels-performance-ultra-fast-v3.0-active]
+  - name: "Performance:Ultra-Fast"
+    color: "0c8599"
+    description: "Ultra-performance optimizations (2787% improvement) - maximum speed"
+    category: "performance"
+  
+  # [GOV][LABELS][PERFORMANCE-PARALLEL][v3.0][ACTIVE]
+  # Grepable: [gov-labels-performance-parallel-v3.0-active]
+  - name: "Performance:Parallel"
+    color: "0969da"
+    description: "Parallel processing and concurrency - multi-threaded"
+    category: "performance"
+  
+  # [GOV][LABELS][PERFORMANCE-MEMORY][v3.0][ACTIVE]
+  # Grepable: [gov-labels-performance-memory-v3.0-active]
+  - name: "Performance:Memory"
+    color: "1d76db"
+    description: "Memory optimization and efficiency - resource management"
+    category: "performance"
+  
+  # [GOV][LABELS][INFRASTRUCTURE-CI-CD][v3.0][ACTIVE]
+  # Grepable: [gov-labels-infrastructure-ci-cd-v3.0-active]
+  - name: "Infrastructure:CI/CD"
+    color: "0e8a16"
+    description: "CI/CD pipeline improvements - delivery automation"
+    category: "infrastructure"
+
+  # ===== USER EXPERIENCE LABELS - YELLOW/ORANGE WARMTH SCALE =====
+  # [GOV][LABELS][UX-VISUAL][v3.0][ACTIVE]
+  # Grepable: [gov-labels-ux-visual-v3.0-active]
+  - name: "UX:Visual"
+    color: "fbca04"
+    description: "Visual enhancements and theming - aesthetic improvements"
+    category: "ux"
+  
+  # [GOV][LABELS][UX-WIZARD][v3.0][ACTIVE]
+  # Grepable: [gov-labels-ux-wizard-v3.0-active]
+  - name: "UX:Wizard"
+    color: "f7dfba"
+    description: "Interactive wizards and guidance - user assistance"
+    category: "ux"
+  
+  # [GOV][LABELS][UX-DASHBOARD][v3.0][ACTIVE]
+  # Grepable: [gov-labels-ux-dashboard-v3.0-active]
+  - name: "UX:Dashboard"
+    color: "fd7e14"
+    description: "Dashboard and analytics interface - data visualization"
+    category: "ux"
+
+  # ===== STATUS LABELS - WORKFLOW SEMANTIC COLORS =====
+  # [GOV][LABELS][STATUS-BLOCKED][v3.0][ACTIVE]
+  # Grepable: [gov-labels-status-blocked-v3.0-active]
+  - name: "Status:Blocked"
+    color: "d73a4a"
+    description: "Issue is blocked and cannot proceed - stop indicator"
+    category: "status"
+  
+  # [GOV][LABELS][STATUS-IN-PROGRESS][v3.0][ACTIVE]
+  # Grepable: [gov-labels-status-in-progress-v3.0-active]
+  - name: "Status:In-Progress"
+    color: "fbca04"
+    description: "Currently being worked on - active work"
+    category: "status"
+  
+  # [GOV][LABELS][STATUS-REVIEW-NEEDED][v3.0][ACTIVE]
+  # Grepable: [gov-labels-status-review-needed-v3.0-active]
+  - name: "Status:Review-Needed"
+    color: "0075ca"
+    description: "Pending review and approval - waiting state"
+    category: "status"
+  
+  # [GOV][LABELS][STATUS-TESTING][v3.0][ACTIVE]
+  # Grepable: [gov-labels-status-testing-v3.0-active]
+  - name: "Status:Testing"
+    color: "7057ff"
+    description: "In testing phase - verification state"
+    category: "status"
+  
+  # [GOV][LABELS][STATUS-READY][v3.0][ACTIVE]
+  # Grepable: [gov-labels-status-ready-v3.0-active]
+  - name: "Status:Ready"
+    color: "2ea043"
+    description: "Ready for deployment - go indicator"
+    category: "status"
+
+  # ===== SPECIAL LABELS - PREMIUM SEMANTIC COLORS =====
+  # [GOV][LABELS][SPECIAL-ENTERPRISE-SUPREME][v3.0][ACTIVE]
+  # Grepable: [gov-labels-special-enterprise-supreme-v3.0-active]
+  - name: "🏰 Enterprise-Supreme"
+    color: "161622"
+    description: "Enterprise Supreme feature - highest tier capability"
+    category: "special"
+  
+  # [GOV][LABELS][SPECIAL-AI-ENHANCED][v3.0][ACTIVE]
+  # Grepable: [gov-labels-special-ai-enhanced-v3.0-active]
+  - name: "🤖 AI-Enhanced"
+    color: "8957e5"
+    description: "AI-powered enhancement with intelligence"
+    category: "special"
+  
+  # [GOV][LABELS][SPECIAL-QUANTUM-SAFE][v3.0][ACTIVE]
+  # Grepable: [gov-labels-special-quantum-safe-v3.0-active]
+  - name: "🛡️ Quantum-Safe"
+    color: "4c2c92"
+    description: "Quantum-safe security implementation"
+    category: "special"
+  
+  # [GOV][LABELS][SPECIAL-BUSINESS-INTELLIGENCE][v3.0][ACTIVE]
+  # Grepable: [gov-labels-special-business-intelligence-v3.0-active]
+  - name: "📊 Business-Intelligence"
+    color: "0969da"
+    description: "Business intelligence and analytics capability"
+    category: "special"
+  
+  # [GOV][LABELS][SPECIAL-ULTRA-PERFORMANCE][v3.0][ACTIVE]
+  # Grepable: [gov-labels-special-ultra-performance-v3.0-active]
+  - name: "⚡ Ultra-Performance"
+    color: "0c8599"
+    description: "Ultra-performance optimization achieved"
+    category: "special"
+  
+  # [GOV][LABELS][SPECIAL-RITUAL-COMPLETE][v3.0][ACTIVE]
+  # Grepable: [gov-labels-special-ritual-complete-v3.0-active]
+  - name: "🧙 Ritual-Complete"
+    color: "2ea043"
+    description: "Repository ritual fully implemented and operational"
+    category: "special"
+
+  # ===== PULL REQUEST SPECIFIC LABELS =====
+  # [GOV][LABELS][PR-DRAFT][v3.0][ACTIVE]
+  # Grepable: [gov-labels-pr-draft-v3.0-active]
+  - name: "PR:Draft"
+    color: "6f42c1"
+    description: "Draft pull request - work in progress"
+    category: "pr"
+  
+  # [GOV][LABELS][PR-READY-REVIEW][v3.0][ACTIVE]
+  # Grepable: [gov-labels-pr-ready-review-v3.0-active]
+  - name: "PR:Ready-Review"
+    color: "0075ca"
+    description: "Pull request ready for review"
+    category: "pr"
+  
+  # [GOV][LABELS][PR-CHANGES-REQUESTED][v3.0][ACTIVE]
+  # Grepable: [gov-labels-pr-changes-requested-v3.0-active]
+  - name: "PR:Changes-Requested"
+    color: "fbca04"
+    description: "Pull request requires changes"
+    category: "pr"
+  
+  # [GOV][LABELS][PR-APPROVED][v3.0][ACTIVE]
+  # Grepable: [gov-labels-pr-approved-v3.0-active]
+  - name: "PR:Approved"
+    color: "2ea043"
+    description: "Pull request approved and ready to merge"
+    category: "pr"
+  
+  # [GOV][LABELS][PR-DO-NOT-MERGE][v3.0][ACTIVE]
+  # Grepable: [gov-labels-pr-do-not-merge-v3.0-active]
+  - name: "PR:Do-Not-Merge"
+    color: "d73a4a"
+    description: "Pull request should not be merged"
+    category: "pr"
+
+  # ===== ISSUE SPECIFIC LABELS =====
+  # [GOV][LABELS][ISSUE-TRIAGE-NEEDED][v3.0][ACTIVE]
+  # Grepable: [gov-labels-issue-triage-needed-v3.0-active]
+  - name: "Issue:Triage-Needed"
+    color: "fbca04"
+    description: "Issue requires triage and categorization"
+    category: "issue"
+  
+  # [GOV][LABELS][ISSUE-DUPLICATE][v3.0][ACTIVE]
+  # Grepable: [gov-labels-issue-duplicate-v3.0-active]
+  - name: "Issue:Duplicate"
+    color: "6f42c1"
+    description: "Duplicate of another issue"
+    category: "issue"
+  
+  # [GOV][LABELS][ISSUE-WONT-DO][v3.0][ACTIVE]
+  # Grepable: [gov-labels-issue-wont-do-v3.0-active]
+  - name: "Issue:Wont-Do"
+    color: "6f42c1"
+    description: "Issue will not be implemented"
+    category: "issue"
+  
+  # [GOV][LABELS][ISSUE-HELP-WANTED][v3.0][ACTIVE]
+  # Grepable: [gov-labels-issue-help-wanted-v3.0-active]
+  - name: "Issue:Help-Wanted"
+    color: "006b75"
+    description: "Community help requested on this issue"
+    category: "issue"
+  
+  # [GOV][LABELS][ISSUE-GOOD-FIRST-ISSUE][v3.0][ACTIVE]
+  # Grepable: [gov-labels-issue-good-first-issue-v3.0-active]
+  - name: "Issue:Good-First-Issue"
+    color: "7057ff"
+    description: "Good issue for newcomers to start with"
+    category: "issue"

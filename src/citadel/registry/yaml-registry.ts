@@ -1,4 +1,9 @@
+// [REGISTRY][SERVICE][TYPESCRIPT][YAML-REGISTRY-001][v3.0][LIVE]
+// Grepable: [registry-script-typescript-yaml-registry-001-v3.0-live]
 // citadel/registry/yaml-registry.ts
+// 🛡️ **Maintainers**: @syndicate-gov/registry-team
+// 🎯 **Semantic Tag**: 🟢 [REGISTRY-TEAM][YAML][SERVICE][TYPESCRIPT]
+// 📊 **Coverage**: YAML-based rule and package registry management
 import { file, YAML } from 'bun';
 
 export interface RegistrySchema {

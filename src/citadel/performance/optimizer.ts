@@ -1,3 +1,5 @@
+// [PERFORMANCE][UTILITY][TYPESCRIPT][OPTIMIZER-001][v3.0][LIVE]
+// Grepable: [performance-script-typescript-optimizer-001-v3.0-live]
 // citadel/performance/optimizer.ts
 import { performance } from 'perf_hooks';
 

@@ -1,4 +1,6 @@
 #!/usr/bin/env bun
+// [VALIDATION][UTILITY][TYPESCRIPT][VALIDATE-HEADERS-001][v3.0][LIVE]
+// Grepable: [validation-utility-typescript-validate-headers-001-v3.0-live]
 // validate-headers.ts - Grepable header validation with AI-driven catalogs
 import { file, YAML, v5 as uuid5 } from 'bun';
 import { performance } from 'perf_hooks';

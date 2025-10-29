@@ -1,4 +1,9 @@
+// [REGISTRY][SERVICE][TYPESCRIPT][API-REGISTRY-001][v3.0][LIVE]
+// Grepable: [registry-script-typescript-api-registry-001-v3.0-live]
 // src/citadel/registry/api-registry.ts
+// 🛡️ **Maintainers**: @syndicate-gov/registry-team
+// 🎯 **Semantic Tag**: 🔴 [REGISTRY-TEAM][API][SERVICE][TYPESCRIPT]
+// 📊 **Coverage**: API-driven registry with WebSocket support
 import { file, serve } from 'bun';
 import { WebSocketServer } from 'ws';
 import { gzip, zstd } from 'bun';

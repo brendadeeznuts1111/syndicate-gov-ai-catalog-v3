@@ -1,4 +1,6 @@
 #!/usr/bin/env bun
+// [VALIDATION][UTILITY][TYPESCRIPT][VALIDATE-SANDBOX-001][v3.0][LIVE]
+// Grepable: [validation-utility-typescript-validate-sandbox-001-v3.0-live]
 // validate-sandbox.ts - Sandboxed header validation with node:vm
 import { file, YAML, v5 as uuid5 } from 'bun';
 import vm from 'node:vm';
