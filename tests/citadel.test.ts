@@ -54,6 +54,11 @@ describe('Citadel CI Gate', () => {
     expect(diff.status).toBe(200);
   });
 
+  test('lockfile frozen', async () => {
+    await $`bun install --frozen-lockfile`.quiet(); // throws on mismatch
+    expect(true).toBe(true);
+  });
+
   test('yaml parsing', async () => {
     const { YAML } = await import('bun');
     const config = YAML.parse(await Bun.file('config/minimal-bun.yaml').text());
