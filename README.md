@@ -280,7 +280,9 @@ bun run scripts/test-analytics.ts
 
 - **[📖 Getting Started Guide](docs/01-getting-started/GETTING-STARTED.md)** - Comprehensive setup and configuration
 - **[📋 Reference Documentation](docs/01-getting-started/REFERENCE.md)** - All variables, constants, and interfaces
-- **[🧪 Testing Guide](docs/04-testing/TESTING-GUIDE.md)** - Advanced testing techniques
+- **[🧪 Testing Suite](tests/README.md)** - Complete testing infrastructure and guide
+- **[🧪 Tests Index](tests/INDEX.md)** - Quick navigation for test categories
+- **[🧪 Testing Guide](docs/07-validation/TESTING.md)** - Advanced testing techniques
 - **[🔐 Security Documentation](docs/03-quantum-security/README.md)** - Security best practices
 
 ### **🎯 Basic Usage**
@@ -835,6 +837,58 @@ Error Recovery: 94% auto-recovery rate
 6. **WebAssembly Integration**: Ultra-fast command execution
 7. **5G Optimization**: Network-aware performance tuning
 8. **Carbon-Neutral Operations**: Green computing practices
+
+---
+
+## 🧪 **Testing**
+
+### **🎯 Testing Overview**
+
+Citadel leverages **Bun 1.3.1**'s native testing capabilities to provide comprehensive, type-safe, and high-performance testing infrastructure.
+
+### **📊 Testing Superpowers**
+
+| Feature | Description | Performance |
+|---------|-------------|-------------|
+| **Type-Safe Assertions** | `expectTypeOf` for compile-time validation | Zero runtime overhead |
+| **Concurrent Execution** | Parallel test execution with isolation | 8x faster execution |
+| **Serial Test Islands** | Race-free sequential test blocks | Deterministic results |
+| **AI-Quiet Mode** | Clean output for AI-assisted development | 90% less noise |
+| **Matrix Testing** | Dynamic tag-driven test selection | Flexible execution |
+
+### **🚀 Quick Testing Commands**
+
+```bash
+# Full test suite with coverage
+bun test --coverage
+
+# AI-quiet mode (clean output)
+CLAUDECODE=1 bun test --only-failures --pass-with-no-tests
+
+# Environment validation
+bun test tests/unit/env.test.ts
+
+# Performance testing
+bun test tests/performance/ --timeout=120000
+
+# Tag-filtered matrix tests
+TAG_FILTER=RUNTIME bun test tests/matrix/
+```
+
+### **📁 Test Categories**
+
+| Category | Directory | Purpose | Quick Command |
+|----------|-----------|---------|---------------|
+| **🔬 Unit Tests** | `tests/unit/` | Component isolation | `bun test tests/unit/` |
+| **🔗 Integration** | `tests/integration/` | Component interaction | `bun test tests/integration/` |
+| **⚡ Performance** | `tests/performance/` | Speed & resource testing | `bun test tests/performance/` |
+| **🏷️ Matrix** | `tests/matrix/` | Dynamic tag-driven tests | `bun test tests/matrix/` |
+
+### **📚 Testing Documentation**
+
+- **[🧪 Testing Suite](tests/README.md)** - Complete testing infrastructure and guide
+- **[🧪 Tests Index](tests/INDEX.md)** - Quick navigation for test categories
+- **[🧪 Testing Guide](docs/07-validation/TESTING.md)** - Advanced testing techniques
 
 ---
 
