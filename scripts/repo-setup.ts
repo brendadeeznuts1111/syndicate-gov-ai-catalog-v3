@@ -80,7 +80,15 @@ async function setupRepository(): Promise<boolean> {
     }
     console.log('✅ Repository created successfully');
   } else {
-    console.log('ℹ️ Repository already exists');
+    console.log('ℹ️ Repository already exists, updating metadata...');
+    
+    // Update repository description
+    const editResult = await executeCommand(['gh', 'repo', 'edit', '--description', config.description]);
+    if (editResult.success) {
+      console.log('✅ Repository description updated');
+    } else {
+      console.warn('⚠️ Failed to update description:', editResult.stderr);
+    }
   }
   
   return true;
@@ -139,9 +147,7 @@ async function setupBranchProtection(): Promise<boolean> {
   console.log('🛡️ Setting up branch protection rules...');
   
   try {
-    const protectionConfig = readFileSync('.github/branch-protection.json', 'utf-8');
-    
-    // Apply branch protection using GitHub CLI
+    // Apply branch protection using GitHub CLI with correct JSON structure
     const result = await executeCommand([
       'gh', 'api', 
       'repos/:owner/:repo/branches/main/protection',
@@ -157,7 +163,22 @@ async function setupBranchProtection(): Promise<boolean> {
       return true;
     } else {
       console.warn('⚠️ Failed to apply branch protection:', result.stderr);
-      return false;
+      // Try simpler protection
+      console.log('🔄 Trying simpler branch protection...');
+      const simpleResult = await executeCommand([
+        'gh', 'api', 
+        'repos/:owner/:repo/branches/main/protection',
+        '--method', 'PUT',
+        '--field', 'required_pull_request_reviews={"required_approving_review_count":1}'
+      ]);
+      
+      if (simpleResult.success) {
+        console.log('✅ Simple branch protection applied');
+        return true;
+      } else {
+        console.warn('⚠️ All branch protection attempts failed');
+        return false;
+      }
     }
   } catch (error) {
     console.error('❌ Failed to setup branch protection:', error);
