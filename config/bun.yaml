@@ -98,6 +98,198 @@ api:
       summary: Admin wand: reload, diff, rollback
       sourcemap: true
 
+    # Manager Tools API Routes (based on real-world patterns)
+    - path: /api/v3/manager-tools/signin
+      method: POST
+      id: manager-tools-signin
+      handler: ./routes/manager-tools/signin.ts
+      auth: public
+      request:
+        schema: SignInRequest
+        required: true
+      response:
+        200: { schema: AuthResponse }
+        401: { schema: Error }
+      tags: [auth, manager-tools]
+      summary: Manager tools authentication endpoint
+      sourcemap: true
+
+    - path: /api/v3/manager-tools/common
+      method: GET
+      id: manager-tools-common
+      handler: ./routes/manager-tools/common.ts
+      auth: jwt
+      response:
+        200: { schema: CommonDataResponse }
+        401: { schema: Error }
+      tags: [manager-tools, common]
+      summary: Common manager tools data
+      sourcemap: true
+
+    - path: /live/data
+      method: GET
+      id: live-data-feed
+      handler: ./routes/live/data.ts
+      auth: jwt
+      parameters:
+        - name: countries
+          in: query
+          schema: { type: boolean }
+        - name: leagues
+          in: query
+          schema: { type: boolean }
+        - name: sports
+          in: query
+          schema: { type: boolean }
+      response:
+        200: { schema: LiveDataResponse }
+        401: { schema: Error }
+      tags: [live, data, real-time]
+      summary: Real-time sports data feed
+      sourcemap: true
+
+    - path: /manager-tools/usersList
+      method: GET
+      id: users-list
+      handler: ./routes/manager-tools/usersList.ts
+      auth: jwt
+      parameters:
+        - name: includeSubAgents
+          in: query
+          schema: { type: boolean }
+        - name: agentNames
+          in: query
+          schema: { type: string }
+      response:
+        200: { schema: UsersListResponse }
+        401: { schema: Error }
+      tags: [manager-tools, users]
+      summary: List users and agents
+      sourcemap: true
+
+    - path: /manager-tools/partnerPreferences
+      method: GET
+      id: partner-preferences
+      handler: ./routes/manager-tools/partnerPreferences.ts
+      auth: jwt
+      response:
+        200: { schema: PartnerPreferencesResponse }
+        401: { schema: Error }
+      tags: [manager-tools, preferences]
+      summary: Partner configuration preferences
+      sourcemap: true
+
+    - path: /manager-tools/groups
+      method: GET
+      id: groups-list
+      handler: ./routes/manager-tools/groups.ts
+      auth: jwt
+      response:
+        200: { schema: GroupsResponse }
+        401: { schema: Error }
+      tags: [manager-tools, groups]
+      summary: User groups management
+      sourcemap: true
+
+    - path: /manager-tools/agents
+      method: GET
+      id: agents-list
+      handler: ./routes/manager-tools/agents.ts
+      auth: jwt
+      parameters:
+        - name: name
+          in: query
+          schema: { type: string }
+      response:
+        200: { schema: AgentsResponse }
+        401: { schema: Error }
+      tags: [manager-tools, agents]
+      summary: Agents management
+      sourcemap: true
+
+    - path: /manager-tools/liveEvents
+      method: GET
+      id: live-events
+      handler: ./routes/manager-tools/liveEvents.ts
+      auth: jwt
+      response:
+        200: { schema: LiveEventsResponse }
+        401: { schema: Error }
+      tags: [manager-tools, live, events]
+      summary: Live events management
+      sourcemap: true
+
+    - path: /manager-tools/reports/periods
+      method: GET
+      id: reports-periods
+      handler: ./routes/manager-tools/reports/periods.ts
+      auth: jwt
+      response:
+        200: { schema: ReportsPeriodsResponse }
+        401: { schema: Error }
+      tags: [manager-tools, reports]
+      summary: Periodic reports data
+      sourcemap: true
+
+    - path: /betLobbyV2/logic
+      method: GET
+      id: bet-lobby-logic
+      handler: ./routes/betLobbyV2/logic.ts
+      auth: jwt
+      response:
+        200: { schema: BetLobbyLogicResponse }
+        401: { schema: Error }
+      tags: [betting, lobby, logic]
+      summary: Betting lobby business logic
+      sourcemap: true
+
+    # WebSocket Routes for Real-time Features
+    - path: /ws/live-events
+      method: WS
+      id: ws-live-events
+      handler: ./routes/ws/live-events.ts
+      auth: jwt
+      subprotocol: live-events-v1
+      tags: [websocket, live, real-time]
+      summary: Real-time live events stream
+      sourcemap: true
+
+    - path: /ws/betting-updates
+      method: WS
+      id: ws-betting-updates
+      handler: ./routes/ws/betting-updates.ts
+      auth: jwt
+      subprotocol: betting-v1
+      tags: [websocket, betting, real-time]
+      summary: Real-time betting odds and updates
+      sourcemap: true
+
+    - path: /ws/manager-notifications
+      method: WS
+      id: ws-manager-notifications
+      handler: ./routes/ws/manager-notifications.ts
+      auth: jwt
+      subprotocol: notifications-v1
+      tags: [websocket, manager, notifications]
+      summary: Manager notifications and alerts
+      sourcemap: true
+
+    # AJAX Handler for Legacy Compatibility
+    - path: /manager-tools/ajax
+      method: POST
+      id: manager-ajax
+      handler: ./routes/manager-tools/ajax.ts
+      auth: jwt
+      request:
+        schema: AjaxRequest
+        required: true
+      response:
+        200: { schema: AjaxResponse }
+        401: { schema: Error }
+      tags: [ajax, manager-tools, legacy]
+      summary: AJAX endpoint for manager tools
+      sourcemap: true
+
 # Enhanced Authentication & Security Configuration
 security:
   scanner: "@socketsecurity/bun-security-scanner"
