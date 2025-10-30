@@ -21,15 +21,15 @@ catalogs:
   testing:
     jest: 29.6.2
     react-testing-library: 14.0.0
-    @testing-library/jest-dom: 6.1.4
+    "@testing-library/jest-dom": 6.1.4
     
   build:
     esbuild: 0.19.0
-    @esbuild-plugins/node-modules-polyfill: 0.2.2
+    "@esbuild-plugins/node-modules-polyfill": 0.2.2
     
   database:
-    @types/pg: 8.10.7
-    @types/redis: 4.0.11
+    "@types/pg": 8.10.7
+    "@types/redis": 4.0.11
     
 # Workspace Configuration
 workspaces:
@@ -329,7 +329,7 @@ rules:
     defaults:
       scope: GOV
       type: RULES
-      variant: ''
+      variant: ""
       version: v2.9
       status: ACTIVE
     grep:
