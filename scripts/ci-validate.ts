@@ -2,7 +2,7 @@
 // scripts/ci-validate.ts - CI-powered schema sentinel + Bun 1.3 hooks
 import { file } from 'bun';
 import { performance } from 'perf_hooks';
-import { YAML } from 'bun';
+// Native Bun.YAML support (Bun v1.3+)
 
 interface CIValidationResult {
   file: string;
@@ -24,7 +24,7 @@ class CIValidator {
   async loadConfig(): Promise<void> {
     try {
       const configContent = await file('config/bun.yaml').text();
-      this.config = YAML.parse(configContent);
+      this.config = Bun.YAML.parse(configContent);
       
       if (!this.config.rules || !this.config.rules.header) {
         throw new Error('Invalid configuration: missing rules.header section');
@@ -185,7 +185,7 @@ class CIValidator {
   private async validateYamlFile(content: string, result: CIValidationResult): Promise<void> {
     try {
       // Parse YAML and validate header structure
-      const yamlContent = YAML.parse(content);
+      const yamlContent = Bun.YAML.parse(content);
       
       if (!yamlContent.scope || !yamlContent.type || !yamlContent.id) {
         result.errors.push('Missing required YAML HEADER fields (scope, type, id)');
