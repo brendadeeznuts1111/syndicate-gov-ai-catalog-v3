@@ -79,6 +79,11 @@ jobs:
       - name: Install Dependencies
         run: bun install --frozen-lockfile
 
+      - name: Install Ripgrep
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ripgrep
+
       - name: Benchmark HEADER Validation
         run: |
           echo "🔍 Benchmarking HEADER validation..."
@@ -92,7 +97,7 @@ jobs:
         run: |
           echo "🏷️ Benchmarking grepable search..."
           START=$(date +%s%N)
-          COUNT=$(bun run grep:tags | rg -c '\[' || echo "0")
+          COUNT=$(bun run grep:tags 2>/dev/null | rg -c '\[' 2>/dev/null || echo "0")
           END=$(date +%s%N)
           SEARCH_TIME=$((($END - $START) / 1000000))
           echo "GREPABLE_SEARCH_TIME=${SEARCH_TIME}ms" >> $GITHUB_ENV

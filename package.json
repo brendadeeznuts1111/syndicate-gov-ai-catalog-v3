@@ -122,6 +122,7 @@
     "grep:registry": "rg --type ts '\\[REGISTRY\\].*\\[LIVE\\]' --colors match:fg:magenta --colors path:fg:blue",
     "// ===== CITADEL CLI OPERATIONS ===== //": "",
     "🏰 citadel": "bun run ./src/citadel/cli/main.ts",
+    "citadel": "bun run ./src/citadel/cli/main.ts",
     "🚪 citadel:init": "bun run ./src/citadel/cli/main.ts init",
     "📦 citadel:install": "bun run ./src/citadel/cli/main.ts install",
     "📤 citadel:publish": "bun run ./src/citadel/cli/main.ts publish",
